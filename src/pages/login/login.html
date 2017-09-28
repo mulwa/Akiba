@@ -10,10 +10,12 @@
   <ion-list>
     <form [formGroup]="loginForm" (ngSubmit)="login()">
       <ion-item>
-        <ion-input type="email" formControlName="email" placeholder="email address"></ion-input>
+        <ion-label floating>Email</ion-label>
+        <ion-input type="email" formControlName="email" ></ion-input>
       </ion-item>
       <ion-item>
-        <ion-input type="password" formControlName="password" placeholder="password"></ion-input>
+        <ion-label floating>Password</ion-label>
+        <ion-input type="password" formControlName="password" ></ion-input>
       </ion-item>
       <ion-item>
         <button ion-button type="submit">Login</button>

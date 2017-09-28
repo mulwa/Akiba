@@ -1,3 +1,5 @@
+import { SavingAccountPage } from './../saving-account/saving-account';
+import { FixedAccountPage } from './../fixed-account/fixed-account';
 import { ChamaPage } from './../chama/chama';
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
@@ -11,9 +13,10 @@ import { IonicPage, NavController, NavParams } from 'ionic-angular';
   templateUrl: 'accout-transactions.html',
 })
 export class AccoutTransactionsPage {
-  private accountType=['Fixed Account','Savings Account','Fixed Amount Saving','Chama Account']
+  private accountType;
 
   constructor(public navCtrl: NavController, public navParams: NavParams) {
+    this.accountType=['Fixed Account','Savings Account','Fixed Amount Saving','Chama Account'];
   }
 
   ionViewDidLoad() {
@@ -25,11 +28,11 @@ export class AccoutTransactionsPage {
   navigateAccount(type:string){
     switch(type){
       case "Fixed Account":{
-        console.log('fixed account');
+        this.navCtrl.push(FixedAccountPage);
         break;
       }
-        case "Saving Account":{
-          console.log("saving account");
+        case "Savings Account":{
+          this.navCtrl.push(SavingAccountPage);
           break;
         }
         case "Fixed Amount Saving":{

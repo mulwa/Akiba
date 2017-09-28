@@ -1,3 +1,5 @@
+import { SavingAccountPage } from './../pages/saving-account/saving-account';
+import { FixedAccountPage } from './../pages/fixed-account/fixed-account';
 import { ChamaPage } from './../pages/chama/chama';
 import { BrowserModule } from '@angular/platform-browser';
 import { ErrorHandler, NgModule } from '@angular/core';
@@ -20,7 +22,9 @@ import { SplashScreen } from '@ionic-native/splash-screen';
     ListPage,
     LoginPage,
     AccoutTransactionsPage,
-    ChamaPage
+    ChamaPage,
+    FixedAccountPage,
+    SavingAccountPage
 
   ],
   imports: [
@@ -34,7 +38,9 @@ import { SplashScreen } from '@ionic-native/splash-screen';
     ListPage,
     LoginPage,
     AccoutTransactionsPage,
-    ChamaPage
+    ChamaPage,
+    FixedAccountPage,
+    SavingAccountPage
     
   ],
   providers: [
