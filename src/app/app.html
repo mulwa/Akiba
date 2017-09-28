@@ -1,11 +1,14 @@
 <ion-menu [content]="content">
   <ion-header>
-    <ion-toolbar>
-      <ion-title>Menu</ion-title>
+    <ion-toolbar color="primary">
+      <ion-title>AKIBA</ion-title>
     </ion-toolbar>
   </ion-header>
 
   <ion-content>
+    <div class="appBanner">
+      <img src="assets/images/nab.jpg" alt="banner miss">
+    </div>   
     <ion-list>
       <button menuClose ion-item *ngFor="let p of pages" (click)="openPage(p)">
         {{p.title}}

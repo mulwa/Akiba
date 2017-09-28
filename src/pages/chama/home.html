@@ -1,0 +1,36 @@
+<ion-header>
+  <ion-navbar color="primary">
+    <button ion-button menuToggle>
+      <ion-icon name="menu"></ion-icon>
+    </button>
+    <ion-title>Sign Up</ion-title>
+  </ion-navbar>
+</ion-header>
+
+<ion-content padding class="home"> 
+      <form [formGroup]="signUpForm" (ngSubmit)="signUp()">
+      <ion-list>
+          <ion-item>
+            <ion-label floating >Name</ion-label>
+            <ion-input type="text" formControlName="name"></ion-input>
+          </ion-item>
+          <ion-item>
+            <ion-label floating>Email Address</ion-label>
+            <ion-input type="text" formControlName="email"></ion-input>
+          </ion-item>
+          <ion-item>
+            <ion-input type="number" formControlName="phone" placeholder="Mobile number"></ion-input>
+          </ion-item>
+          <ion-item>
+            <ion-input type="password" formControlName="password" placeholder="Password"></ion-input>
+          </ion-item>
+          <ion-item>
+            <ion-input type="password" formcontrolName="password2" placeholder="Confirm  Password"></ion-input>
+          </ion-item>
+          <ion-item>
+            <button ion-button outline type="submit" align="end">Register</button>
+          </ion-item> 
+          <ion-item><p>Already Have Account!</p> <button ion-button  outline (click)="createAccount()">Login</button> </ion-item>        
+      </ion-list>
+      </form>                      
+</ion-content>
