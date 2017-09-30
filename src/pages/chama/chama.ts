@@ -14,10 +14,15 @@ import { IonicPage, NavController, NavParams } from 'ionic-angular';
   templateUrl: 'chama.html',
 })
 export class ChamaPage {
-  private mychamas;
+  private mychamas:any[];
 
   constructor(public navCtrl: NavController, public navParams: NavParams) {
-    this.mychamas = ['Account1','Account2','Account3','Account4','Account5','Account6'];
+    this.mychamas = [
+      { name:"Open Republic",members:"51"},
+      { name:"Gdg Juja", members:"100"},
+      { name:"Young Proffessionals", members:"30"},
+      { name:"Akiba Bora",members:"20" }
+    ]
   }
   
 

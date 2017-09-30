@@ -9,8 +9,16 @@
 
 <ion-content padding>
   <ion-list>
-    <button ion-item *ngFor="let item of accountType" (click)="openTransaction(item)">
-      {{ item }}
-</button>
+    <ion-item *ngFor="let item of accountType">
+      <ion-avatar item-start>
+        <img src="assets/images/icon.png">
+      </ion-avatar>
+      <h2 (click)="openTransaction(item)">{{item}}</h2>
+    </ion-item> 
   </ion-list>
 </ion-content>
+
+
+  <!--<button ion-item *ngFor="let item of accountType" (click)="openTransaction(item)">
+      {{ item }}
+</button>-->

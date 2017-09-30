@@ -18,7 +18,15 @@
 
 <ion-content padding>
   <ion-list>
-   <button class="nopaddingList" ion-item *ngFor="let item of mychamas">{{item}}</button>
+    <ion-item *ngFor="let item of mychamas">
+      <ion-avatar item-start>
+        <img src="assets/images/icon.png">
+      </ion-avatar>
+      <h2>{{item.name}}</h2>
+      <ion-badge item-end>{{item.members}}</ion-badge>
+    </ion-item>    
   </ion-list>
-
 </ion-content>
+
+<!--<button class="nopaddingList" ion-item *ngFor="let item of mychamas">
+      {{item}} <ion-badge item-end>260k</ion-badge></button>  -->
