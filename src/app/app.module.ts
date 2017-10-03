@@ -15,6 +15,7 @@ import { AccoutTransactionsPage }  from '../pages/accout-transactions/accout-tra
 import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
 import { DatePicker } from '@ionic-native/date-picker';
+// import { DatePicker } from 'ionic2-date-picker';
 
 @NgModule({
   declarations: [
@@ -39,7 +40,7 @@ import { DatePicker } from '@ionic-native/date-picker';
     ListPage,
     LoginPage,
     AccoutTransactionsPage,
-    ChamaPage,
+    ChamaPage,   
     FixedAccountPage,
     SavingAccountPage
     
