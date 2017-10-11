@@ -28,4 +28,20 @@ $colors: (
 #btnMedium{
         height: 40px;
     }
+  .whitebg{
+        background-color: #f2f2f2;
+    }
+    ion-col div {               
+        min-height: 100px;      
+        background-color:color($colors,light);     
+               
+   }
+   .ion-card-header{
+    position: absolute;
+    top: 36%;
+    font-size: 2.0em;
+    width: 100%;
+    font-weight: bold;
+    color: #fff;
+  }
 

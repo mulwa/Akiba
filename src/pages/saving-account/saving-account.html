@@ -13,8 +13,25 @@
   </ion-navbar>
 </ion-header>
 
-<ion-content padding>
-  <ion-list>
+<ion-content class="whitebg">
+  <ion-grid>  
+  <ion-col col-12>
+    <div>
+      <ion-card color="secondary">        
+        <ion-card-header>Savings Account</ion-card-header>
+        <ion-card-content>This is a Saving Save On Fixed Account And get 0.04% interest</ion-card-content> 
+      </ion-card>      
+    </div>
+  </ion-col>
+</ion-grid>
+<ion-grid  offset-4 col-8>
+    <div>
+      <ion-icon item-start>
+          <img id="banner" height="100px" src="assets/images/savings_acc.png">
+        </ion-icon>
+    </div>
+  </ion-grid>
+  <ion-list padding>
     <ion-item>
       <ion-label floating>Percentage</ion-label>
       <ion-input type="text"></ion-input>

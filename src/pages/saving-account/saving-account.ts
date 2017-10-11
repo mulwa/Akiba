@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
-import { DatePicker } from '@ionic-native/date-picker';
+// import { DatePicker } from '@ionic-native/date-picker';
+
 
 /**
  * Generated class for the SavingAccountPage page.
@@ -17,7 +18,7 @@ import { DatePicker } from '@ionic-native/date-picker';
 export class SavingAccountPage {
 
   constructor(public navCtrl: NavController,
-   public navParams: NavParams,private datepicker:DatePicker) {
+   public navParams: NavParams) {
   }
 
   ionViewDidLoad() {
@@ -25,18 +26,7 @@ export class SavingAccountPage {
   }
   showDatePicker(){
     console.log("dateicker activated");
-    this.datepicker.show({
-      date:new Date(),
-      mode: 'date',
-      androidTheme: this.datepicker.ANDROID_THEMES.THEME_HOLO_DARK
-    }).then(
-      date => {
-        console.log("selected date :"+date);
-      },
-      error => {
-        console.log("An errror occoured :"+error);
-      }
-    );
+    
   }
 
 }

@@ -7,7 +7,14 @@
   </ion-navbar>
 </ion-header>
 
-<ion-content padding class="home"> 
+<ion-content padding class="whitebg">
+  <ion-grid  offset-4 col-8>
+    <div>
+      <ion-icon item-start>
+          <img id="banner" height="100px" src="assets/images/Akiba_logo.png">
+        </ion-icon>
+    </div>
+  </ion-grid>
       <form [formGroup]="signUpForm" (ngSubmit)="signUp()">
       <ion-list>
           <ion-item>
