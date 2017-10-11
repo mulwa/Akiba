@@ -11,9 +11,9 @@
   <ion-list>
     <ion-item *ngFor="let item of accountType">
       <ion-avatar item-start>
-        <img src="assets/images/icon.png">
+        <img src="assets/images/{{item.icon}}">
       </ion-avatar>
-      <h2 (click)="openTransaction(item)">{{item}}</h2>
+      <p id="headerTopic" (click)="openTransaction(item.name)">{{item.name}}</p>
     </ion-item> 
   </ion-list>
 </ion-content>

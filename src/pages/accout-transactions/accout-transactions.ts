@@ -14,9 +14,16 @@ import { IonicPage, NavController, NavParams } from 'ionic-angular';
 })
 export class AccoutTransactionsPage {
   private accountType;
+  
 
   constructor(public navCtrl: NavController, public navParams: NavParams) {
-    this.accountType=['Fixed Account','Savings Account','Fixed Amount Saving','Chama Account'];
+    this.accountType=[
+      { name:"Fixed Account",icon:"fixed_acc.png"},
+      { name:'Savings Account', icon:'savings_acc.png'},
+      { name: 'Fixed Amount Savings', icon:'fixed1_acc.png'},
+      { name: 'Chama Account',icon:'chama_acc.png'}
+    ];
+    
   }
 
   ionViewDidLoad() {

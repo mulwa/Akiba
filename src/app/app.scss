@@ -15,11 +15,17 @@
 // for the .md, .ios, or .wp mode classes. The mode class is
 // automatically applied to the <body> element in the app.
 $colors: (
-  primary:    #795548,
-  secondary:  #5D4037,
-  danger:     #f53d3d,
+  primary:    #7f401c,
+  secondary:  #e38d25,
+  danger:     #e38d25,
   light:      #f4f4f4,
   dark:       #222,
   favorite:   #69BB7B
 );
+// primary #7f401c;
+// secondary #e38d25;
+// danger #e29f26;
+#btnMedium{
+        height: 40px;
+    }
 
