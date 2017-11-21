@@ -1,3 +1,4 @@
+import { AuthProvider } from './../../providers/auth/auth';
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
 import { Validators, FormGroup, FormBuilder} from '@angular/forms';
@@ -19,7 +20,8 @@ export class LoginPage {
 
   constructor(public navCtrl: NavController, 
               public navParams: NavParams,
-              private form_builder:FormBuilder) { 
+              private form_builder:FormBuilder,
+              private authService:AuthProvider) { 
     this.initializeForm();    
   }
 
@@ -35,6 +37,7 @@ export class LoginPage {
   }
   login(){
     console.log(this.loginForm.value);
+   
   }
 
 }
