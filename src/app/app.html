@@ -5,15 +5,21 @@
     </ion-toolbar>
   </ion-header>
 
-  <ion-content>
-    <div class="appBanner">
-      <img src="assets/images/nab.jpg" alt="banner miss">
-    </div>   
-    <ion-list>
-      <button menuClose ion-item *ngFor="let p of pages" (click)="openPage(p)">
+  <ion-content>    
+    <ion-grid  offset-1 col-11>
+    <div>
+      <ion-icon item-start>
+          <img id="banner" height="100px" src="assets/images/Akiba_logo.png">
+        </ion-icon>
+    </div>
+  </ion-grid>
+    <div class="navarea">
+      <ion-list>
+      <button menuClose ion-item  style="background-color: transparent !important; color:#fff" *ngFor="let p of pages" (click)="openPage(p)">
         {{p.title}}
       </button>
     </ion-list>
+    </div>
   </ion-content>
 
 </ion-menu>

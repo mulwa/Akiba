@@ -2,13 +2,9 @@ import { AuthProvider } from './../../providers/auth/auth';
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
 import { Validators, FormGroup, FormBuilder} from '@angular/forms';
+import {User} from '../../models/User';
 
-/**
- * Generated class for the LoginPage page.
- *
- * See https://ionicframework.com/docs/components/#navigation for more info on
- * Ionic pages and navigation.
- */
+
 
 @IonicPage()
 @Component({
@@ -36,7 +32,12 @@ export class LoginPage {
     });    
   }
   login(){
-    console.log(this.loginForm.value);
+    console.log(this.loginForm.value);    
+    this.authService.authenticate(this.loginForm.value).subscribe(data =>{
+      console.log("before :" +data.status);
+      // let user = data[0].status;
+      // console.log("form function"+user);
+    })
    
   }
 

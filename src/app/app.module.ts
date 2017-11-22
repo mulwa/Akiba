@@ -19,6 +19,9 @@ import { SplashScreen } from '@ionic-native/splash-screen';
 // import { DatePicker } from 'ionic2-date-picker';
 import { DatePicker } from 'ionic2-date-picker';
 import { AuthProvider } from '../providers/auth/auth';
+import { UserServiceProvider } from '../providers/user-service/user-service';
+import { IonicStorageModule } from '@ionic/storage';
+
 
 @NgModule({
   declarations: [
@@ -36,6 +39,7 @@ import { AuthProvider } from '../providers/auth/auth';
   imports: [
     BrowserModule,
     HttpModule,
+    IonicStorageModule.forRoot(),
     IonicModule.forRoot(MyApp),
   ],
   bootstrap: [IonicApp],
@@ -56,7 +60,8 @@ import { AuthProvider } from '../providers/auth/auth';
     SplashScreen,
     DatePicker,
     {provide: ErrorHandler, useClass: IonicErrorHandler},
-    AuthProvider
+    AuthProvider,   
+    UserServiceProvider
   ]
 })
 export class AppModule {}
