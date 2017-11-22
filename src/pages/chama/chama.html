@@ -16,8 +16,26 @@
   </ion-navbar>
 </ion-header>
 
-<ion-content padding>
-  <ion-list>
+<ion-content>
+   <ion-grid>
+    <div class="Pagetop">
+    <ion-row>
+      <ion-col col-4>
+      <div class="iconArea">
+      <ion-icon item-start style="background-color: transparent !important">
+          <img id="banner" height="100px" src="assets/images/chama_acc.png">
+        </ion-icon>
+    </div>
+      </ion-col>
+    <ion-col col-8>
+    <div id="tipsContent">
+     <p> Current Active Chamas</p>   
+    </div>
+  </ion-col>
+    </ion-row>
+  </div>
+  </ion-grid> 
+  <ion-list padding>
     <ion-item *ngFor="let item of mychamas">
       <ion-avatar item-start>
         <img src="assets/images/icon.png">

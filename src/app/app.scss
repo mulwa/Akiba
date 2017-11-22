@@ -51,7 +51,30 @@ $colors: (
    background-color: chocolate !important;
    height: 100%;
  }
-//  ion-item {
-// 	background-color: transparent !important;
-// }
-
+ ion-header {
+   padding-bottom: 0px !important;
+   margin: 0px !important;
+ }
+// for all pages with image icon on top
+    ion-grid .Pagetop{
+            position: relative;                  
+    }
+    .Pagetop{
+        background-color:chocolate;
+    }
+    ion-col div {
+        background-color: transparent !important;        
+        background-color:chocolate;        
+        border-radius: 2px;
+        padding: 5px;
+        text-align: center;
+   }
+   ion-col div p {
+       color: #fff;
+   }
+   ion-col .iconArea {
+       position: absolute;
+       height: 80px;
+       top: 20px;
+   }
+  //  end page banner
