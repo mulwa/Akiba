@@ -7,5 +7,26 @@ page-fixed-account {
         padding: 0px;
         margin: 0px;
     }
+    ion-grid .Pagetop{
+        position: relative;
+    }
+    .Pagetop{
+        background-color:chocolate;
+    }
+    ion-col div {
+        background-color: transparent !important;        
+        background-color:chocolate;        
+        border-radius: 2px;
+        padding: 5px;
+        text-align: center;
+   }
+   ion-col div p {
+       color: #fff;
+   }
+   ion-col .iconArea {
+       position: absolute;
+       height: 80px;
+       top: 20px;
+   }
 
 }
