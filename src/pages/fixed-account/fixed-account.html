@@ -30,11 +30,11 @@
   <ion-list padding>
     <ion-item>
       <ion-label floating>Amount</ion-label>
-      <ion-input type="text"></ion-input>
+      <ion-input type="number"></ion-input>
     </ion-item>
     <ion-item>
       <ion-label floating >Withdraw Date</ion-label>
-      <ion-input type="text"></ion-input>
+      <ion-datetime displayFormat="DD-MM-YYYY" [(ngModel)]="today"></ion-datetime>
     </ion-item>
     <ion-item>      
         <button id="btnMedium" block right ion-button  color="secondary" (click)="saveSubmit()" type="submit">Save</button>         

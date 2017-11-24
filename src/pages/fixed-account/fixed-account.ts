@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { IonicPage, NavController,LoadingController,AlertController } from 'ionic-angular';
+import {FormGroup} from '@angular/forms';
 
 
 @IonicPage()
@@ -8,10 +9,13 @@ import { IonicPage, NavController,LoadingController,AlertController } from 'ioni
   templateUrl: 'fixed-account.html',
 })
 export class FixedAccountPage {
+  today:any;
 
   constructor(public navCtrl: NavController,
               private loadingCtrl:LoadingController,
               private alertCtrl:AlertController) {
+
+      this.today = new Date().toISOString();
   }
 
   ionViewDidLoad() {

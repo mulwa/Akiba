@@ -23,6 +23,7 @@
     <preference name="SplashScreen" value="screen" />
     <preference name="SplashScreenDelay" value="3000" />
     <platform name="android">
+        <preference name="loadUrlTimeoutValue" value="700000" />
         <allow-intent href="market:*" />
         <icon density="ldpi" src="resources/android/icon/drawable-ldpi-icon.png" />
         <icon density="mdpi" src="resources/android/icon/drawable-mdpi-icon.png" />
@@ -80,6 +81,8 @@
     </platform>
     <allow-navigation href="http://10.3.22.51:8101" />
     <allow-navigation href="http://192.168.137.207:8101" />
+    <allow-navigation href="http://172.31.170.95:8100" />
+    <allow-navigation href="http://192.168.42.105:8100" />
     <engine name="android" spec="^6.2.3" />
     <engine name="browser" spec="^4.1.0" />
     <plugin name="cordova-plugin-datepicker" spec="^0.9.3" />
