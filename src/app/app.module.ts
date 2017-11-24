@@ -23,6 +23,7 @@ import { UserServiceProvider } from '../providers/user-service/user-service';
 import { IonicStorageModule } from '@ionic/storage';
 
 
+
 @NgModule({
   declarations: [
     MyApp,
@@ -61,7 +62,8 @@ import { IonicStorageModule } from '@ionic/storage';
     DatePicker,
     {provide: ErrorHandler, useClass: IonicErrorHandler},
     AuthProvider,   
-    UserServiceProvider
+    UserServiceProvider,
+    
   ]
 })
 export class AppModule {}

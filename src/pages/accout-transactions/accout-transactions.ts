@@ -21,7 +21,8 @@ export class AccoutTransactionsPage {
       { name:"Fixed Account",icon:"fixed_acc.png"},
       { name:'Savings Account', icon:'savings_acc.png'},
       { name: 'Fixed Amount Savings', icon:'fixed1_acc.png'},
-      { name: 'Chama Account',icon:'chama_acc.png'}
+      { name: 'Chama Account',icon:'chama_acc.png'},
+      { name: 'Lengo Account',icon:'lengo_acc.png'}
     ];
     
   }

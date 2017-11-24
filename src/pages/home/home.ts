@@ -27,25 +27,23 @@ export class HomePage {
 
     });
   }
-  signUp(){
-    // console.log(this.signUpForm.value); 
-    // const loading = this.loadingCtrl.create({
-    //   content:'Please wait creating Account',
-    //   duration:5000
-    // });  
-    // loading.onDidDismiss(()=>{
-    //   this.showAlert();
-    // })
-    // loading.present();
-    this.userProvider.createUser(this.signUpForm.value).then(res =>{
-      if(res){
-        this.showAlert("Welcome","Successfully Created Account")
-      }else{
-        this.showAlert("Error","An Error Has occured Please Try  Later");
-      }
-    })
+  signUp(){    
+    
+    this.showLoading("Creating Account");
 
   }
+   showLoading(content:string){
+    let loading = this.loadingCtrl.create({
+      content:content,
+      duration:3000,
+    });
+    loading.onDidDismiss(()=>{
+      this.showAlert("Keep Calm","Server Not Up");
+
+    });
+    loading.present();
+  }
+ 
   showAlert(title:string, msg:string){
     const alert = this.alertCtrl.create({
       title:title,

@@ -8,17 +8,29 @@
 </ion-header>
 
 <ion-content padding>
-  <ion-list>
+  <ion-card *ngFor="let item of accountType" (click)="openTransaction(item.name)"> 
+  <ion-card-content>
+    <ion-grid>
+      <ion-row>
+        <ion-col col-4>
+          <ion-avatar>
+            <img src="assets/images/{{item.icon}}">
+          </ion-avatar>
+        </ion-col>
+        <ion-col col-8>{{item.name}}</ion-col>
+      </ion-row>
+    </ion-grid>
+  </ion-card-content>
+</ion-card>
+  <!--<ion-list>
     <ion-item *ngFor="let item of accountType">
       <ion-avatar item-start>
         <img src="assets/images/{{item.icon}}">
       </ion-avatar>
       <p id="headerTopic" (click)="openTransaction(item.name)">{{item.name}}</p>
     </ion-item> 
-  </ion-list>
+  </ion-list>-->
 </ion-content>
 
 
-  <!--<button ion-item *ngFor="let item of accountType" (click)="openTransaction(item)">
-      {{ item }}
-</button>-->
+  

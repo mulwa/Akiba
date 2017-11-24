@@ -1,8 +1,9 @@
 import { AuthProvider } from './../../providers/auth/auth';
 import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams } from 'ionic-angular';
+import { IonicPage, NavController, NavParams, LoadingController, AlertController } from 'ionic-angular';
 import { Validators, FormGroup, FormBuilder} from '@angular/forms';
 import {User} from '../../models/User';
+
 
 
 
@@ -17,6 +18,8 @@ export class LoginPage {
   constructor(public navCtrl: NavController, 
               public navParams: NavParams,
               private form_builder:FormBuilder,
+              private loadingCtrl:LoadingController,
+              private alertCtrl:AlertController,
               private authService:AuthProvider) { 
     this.initializeForm();    
   }
@@ -33,12 +36,32 @@ export class LoginPage {
   }
   login(){
     console.log(this.loginForm.value);    
-    this.authService.authenticate(this.loginForm.value).subscribe(data =>{
-      console.log("before :" +data.status);
-      // let user = data[0].status;
-      // console.log("form function"+user);
-    })
-   
+    // this.authService.authenticate(this.loginForm.value).subscribe(data =>{
+    //   console.log("before :" +data.status);
+    //   // let user = data[0].status;
+    //   // console.log("form function"+user);
+      
+    // })   
+    this.showLoading("Validating Credentials");
+  }
+  showLoading(content:string){
+    let loading = this.loadingCtrl.create({
+      content:content,
+      duration:3000,
+    });
+    loading.onDidDismiss(()=>{
+      this.showAlert("Keep Calm","Server Not Up");
+    });
+    loading.present();
+  }
+  showAlert(title:string, msg:string){
+    const alert = this.alertCtrl.create({
+      title:title,
+      subTitle:msg,
+      buttons:['Ok']
+    });
+    alert.present();
+    
   }
 
 }
