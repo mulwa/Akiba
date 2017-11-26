@@ -8,7 +8,7 @@ import 'rxjs/add/operator/map';
 @Injectable()
 export class AuthProvider {
   isLoggedin:boolean;
-  authToken:any; 
+  authToken:any;  
   currentMail:string; 
   private url:string ="http://ku-elearning.com/akiba/public/api/login";
 
@@ -19,9 +19,8 @@ export class AuthProvider {
   }
 
   authenticate(user){
-    const body = "email=" + user.email + "&password="+ user.password;
-    // let body = JSON.stringify(user);
-    console.log(body);
+    const body = "email=" + user.email + "&password="+ user.password;   
+    
     let headers = new Headers();
     headers.append('content-type','application/x-www-form-urlencoded');
     headers.append('accept', 'application/json'); 
@@ -30,25 +29,23 @@ export class AuthProvider {
     return this.http.post(this.url,body,options)
       .map(res =>res.json());
   }
+  
 
   storeUserCredential(email:string,token:string){   
-    this.storage.set('email',email);
-    this.storage.set('user_token',token);
+    window.localStorage.setItem('user_token',token);    
+    window.localStorage.setItem('email',email);
+    
   }
-  getCurrentEmail(){
-    return this.storage.get('email').then((val) =>{
-      this.currentMail = val;     
-    });   
+ 
+  getCurrentEmail():string{
+  return window.localStorage.getItem('email');
   }
   getUserToken(){
-    return this.storage.get('user_token').then((val)=>{
-      this.authToken = val;    
-    });
+    return window.localStorage.getItem('user_token');
   }
   destroyUser(){
-    this.storage.clear().then((res)=>{
-      console.log("when user clicks logOUt"+res);
-    });    
+      window.localStorage.removeItem('user_token');
+      window.localStorage.removeItem('email');
   }
   checkLoginStatus(){
     if(this.authToken != null){

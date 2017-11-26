@@ -1,3 +1,6 @@
+import { UserDataProvider } from './../../providers/user-data/user-data';
+import { Storage } from '@ionic/storage';
+import { AuthProvider } from './../../providers/auth/auth';
 import { Component } from '@angular/core';
 import { IonicPage, NavController,LoadingController,AlertController } from 'ionic-angular';
 import {FormGroup} from '@angular/forms';
@@ -10,20 +13,47 @@ import {FormGroup} from '@angular/forms';
 })
 export class FixedAccountPage {
   today:any;
+  private user_token:string;
+  user:string;
 
   constructor(public navCtrl: NavController,
               private loadingCtrl:LoadingController,
-              private alertCtrl:AlertController) {
+              private alertCtrl:AlertController,
+              private authService:AuthProvider,
+              private storage:Storage,
+              private userDataService:UserDataProvider) {
 
       this.today = new Date().toISOString();
+      this.user_token = this.authService.getUserToken();
+      this.user = this.authService.getCurrentEmail();
+      console.log(this.user_token+""+this.user);
+
+      if(this.user_token != null){
+        console.log("good to go");
+      }else{
+        console.log("please login");
+      }
+
+      this.userDataService.getCurrentBalance(this.user_token).subscribe(data =>{
+        console.log(data);
+
+      });
+
+    
   }
+
+
+
 
   ionViewDidLoad() {
     console.log('ionViewDidLoad FixedAccountPage');
   }
+
   saveSubmit(){
     this.showLoading("Saving Fixed Account");
   }
+
+    
   showLoading(content:string){
     let loading = this.loadingCtrl.create({
       content:content,

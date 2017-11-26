@@ -20,7 +20,9 @@ import { SplashScreen } from '@ionic-native/splash-screen';
 import { DatePicker } from 'ionic2-date-picker';
 import { AuthProvider } from '../providers/auth/auth';
 import { UserServiceProvider } from '../providers/user-service/user-service';
-import { IonicStorageModule } from '@ionic/storage';
+import { IonicStorageModule,Storage} from '@ionic/storage';
+import { UserDataProvider } from '../providers/user-data/user-data';
+
 
 
 
@@ -59,10 +61,11 @@ import { IonicStorageModule } from '@ionic/storage';
   providers: [
     StatusBar,
     SplashScreen,
-    DatePicker,
+    DatePicker,    
     {provide: ErrorHandler, useClass: IonicErrorHandler},
     AuthProvider,   
     UserServiceProvider,
+    UserDataProvider,
     
   ]
 })

@@ -14,6 +14,7 @@ import {User} from '../../models/User';
 })
 export class LoginPage {
   private loginForm:FormGroup;
+  private returnMessage:string;
 
   constructor(public navCtrl: NavController, 
               public navParams: NavParams,
@@ -21,7 +22,8 @@ export class LoginPage {
               private loadingCtrl:LoadingController,
               private alertCtrl:AlertController,
               private authService:AuthProvider) { 
-    this.initializeForm();    
+    this.initializeForm();  
+   
   }
 
   ionViewDidLoad() {
@@ -36,12 +38,20 @@ export class LoginPage {
   }
   login(){
     console.log(this.loginForm.value);    
-    // this.authService.authenticate(this.loginForm.value).subscribe(data =>{
-    //   console.log("before :" +data.status);
-    //   // let user = data[0].status;
-    //   // console.log("form function"+user);
+    this.authService.authenticate(this.loginForm.value).subscribe(data =>{
+      console.log(data);
+      this.returnMessage = data.status;
+      if(data.status==="success"){
+       this.authService.storeUserCredential(data.user.email,data.token);
+      console.log(data.user);
+      console.log("token b4 save"+data.token);
+
+
+      }else{
+        console.log("not saving");
+      }
       
-    // })   
+    })   
     this.showLoading("Validating Credentials");
   }
   showLoading(content:string){
