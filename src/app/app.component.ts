@@ -1,3 +1,4 @@
+import { AuthProvider } from './../providers/auth/auth';
 import { Component, ViewChild } from '@angular/core';
 import { Nav, Platform } from 'ionic-angular';
 import { StatusBar } from '@ionic-native/status-bar';
@@ -19,7 +20,7 @@ export class MyApp {
 
   pages: Array<{title: string, component: any}>;
 
-  constructor(public platform: Platform, public statusBar: StatusBar, public splashScreen: SplashScreen) {
+  constructor(public platform: Platform, public statusBar: StatusBar, public splashScreen: SplashScreen,public authProvider:AuthProvider) {
     this.initializeApp();
 
     // used for an example of ngFor and navigation
@@ -27,7 +28,8 @@ export class MyApp {
       { title: 'Transaction',component: AccoutTransactionsPage },
       { title: 'Open Account', component: HomePage },
       { title: 'Login', component: LoginPage},
-      { title: 'List', component: ListPage }
+      { title: 'List', component: ListPage },
+      { title: 'Logout',component: null}
     ];
 
   }
@@ -41,9 +43,14 @@ export class MyApp {
     });
   }
 
-  openPage(page) {
-    // Reset the content nav to have just this page
-    // we wouldn't want the back button to show in this scenario
-    this.nav.setRoot(page.component);
+  openPage(page) {    
+    if(page.component){
+      this.nav.setRoot(page.component);
+    }else{
+      // clear storage
+      console.log("clearing user data");
+      this.authProvider.destroyUser();
+      this.nav.setRoot(LoginPage);
+    }
   }
 }
