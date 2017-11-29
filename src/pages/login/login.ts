@@ -14,7 +14,9 @@ import {User} from '../../models/User';
 })
 export class LoginPage {
   private loginForm:FormGroup;
-  private returnMessage:string;
+  private loginStatus:string;
+  private loading:any;
+  
 
   constructor(public navCtrl: NavController, 
               public navParams: NavParams,
@@ -22,8 +24,7 @@ export class LoginPage {
               private loadingCtrl:LoadingController,
               private alertCtrl:AlertController,
               private authService:AuthProvider) { 
-    this.initializeForm();  
-   
+    this.initializeForm();   
   }
 
   ionViewDidLoad() {
@@ -36,34 +37,38 @@ export class LoginPage {
       password: ['',Validators.required]
     });    
   }
-  login(){
-    console.log(this.loginForm.value);    
-    this.authService.authenticate(this.loginForm.value).subscribe(data =>{
-      console.log(data);
-      this.returnMessage = data.status;
-      if(data.status==="success"){
+  login(){ 
+    this.loading = this.loadingCtrl.create({
+      content: "Checking Credentials",
+      duration:10000
+    });
+    this.loading.present().then(()=>{
+      this.authService.authenticate(this.loginForm.value).subscribe(data =>{     
+      if(data.status == "success"){
        this.authService.storeUserCredential(data.user.email,data.token);
-      console.log(data.user);
-      console.log("token b4 save"+data.token);
-
+       this.loginStatus ="Welcome " + data.user.name+"";
+       
 
       }else{
         console.log("not saving");
-      }
+        this.loginStatus = "Wrong Email Password combination";
+         
+      }      
+    },error =>{
+      console.log(error);
+      this.loginStatus = "Please Try again Later";
+       
+    },()=>{
+      console.log("login completed"); 
+      this.loading.dismissAll();
+      this.showAlert("Login  Status",this.loginStatus);  
+    });   
+  });   
+          
       
-    })   
-    this.showLoading("Validating Credentials");
+    
   }
-  showLoading(content:string){
-    let loading = this.loadingCtrl.create({
-      content:content,
-      duration:3000,
-    });
-    loading.onDidDismiss(()=>{
-      this.showAlert("Keep Calm","Server Not Up");
-    });
-    loading.present();
-  }
+
   showAlert(title:string, msg:string){
     const alert = this.alertCtrl.create({
       title:title,

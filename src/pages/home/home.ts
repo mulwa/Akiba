@@ -1,4 +1,4 @@
-import { UserServiceProvider } from './../../providers/user-service/user-service';
+import { RegistrationProvider } from './../../providers/registration/registration';
 import { Component } from '@angular/core';
 import { NavController, AlertController } from 'ionic-angular';
 import { FormBuilder,Validators,FormGroup} from '@angular/forms';
@@ -14,22 +14,42 @@ import { LoadingController } from 'ionic-angular';
 })
 export class HomePage {
   private signUpForm:FormGroup;
+  private message:string;
 
   constructor(public navCtrl: NavController, private form_builder:FormBuilder,
-  private loadingCtrl:LoadingController,private alertCtrl:AlertController,private userProvider:UserServiceProvider) {
-
+  private loadingCtrl:LoadingController,private alertCtrl:AlertController,private regProvider:RegistrationProvider) {
+    
     this.signUpForm  =  this.form_builder.group({
       name:['',Validators.required],
       email:['',Validators.required],
       phone_number: ['',Validators.required],
       password:['',Validators.required],
       password2:['',Validators.required]
-
+ 
     });
   }
-  signUp(){    
-    
-    this.showLoading("Creating Account");
+  signUp(){ 
+    let loader = this.loadingCtrl.create({
+      content:"Registering Your Details",
+      duration:10000
+    });
+    loader.present().then(()=>{
+      this.regProvider.regiserUser(this.signUpForm.value).subscribe((data)=>{
+        console.log(data);
+        if(data.status=="success"){
+          this.message="Thanks for Joining Our community"
+        }else{
+          this.message="Please try Again"
+        }
+      }, error =>{
+        console.log("Error happend"+error);        
+        this.message="Erro! Please Try again Later";
+      },()=>{
+        console.log("completed");
+        loader.dismissAll();
+        this.showAlert("Status",this.message);
+      });
+    });  
 
   }
    showLoading(content:string){

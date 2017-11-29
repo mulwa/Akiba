@@ -8,8 +8,8 @@
 </ion-header>
 
 <ion-content padding>
-  <ion-card *ngFor="let item of accountType" (click)="openTransaction(item.name)"> 
-  <ion-card-content>
+  <ion-card *ngFor="let item of accountType" (click)="openTransaction(item.name)">  
+  <ion-card-content style="padding:0%;">
     <ion-grid>
       <ion-row>
         <ion-col col-4>
@@ -17,7 +17,7 @@
             <img src="assets/images/{{item.icon}}">
           </ion-avatar>
         </ion-col>
-        <ion-col col-8>{{item.name}}</ion-col>
+        <ion-col col-8 style="margin-top:25px;">{{item.name}}</ion-col>
       </ion-row>
     </ion-grid>
   </ion-card-content>
