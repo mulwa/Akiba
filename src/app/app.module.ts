@@ -23,6 +23,7 @@ import { UserServiceProvider } from '../providers/user-service/user-service';
 import { IonicStorageModule,Storage} from '@ionic/storage';
 import { UserDataProvider } from '../providers/user-data/user-data';
 import { RegistrationProvider } from '../providers/registration/registration';
+import { FixedAccountProvider } from '../providers/fixed-account/fixed-account';
 
 
 
@@ -68,6 +69,7 @@ import { RegistrationProvider } from '../providers/registration/registration';
     UserServiceProvider,
     UserDataProvider,
     RegistrationProvider,
+    FixedAccountProvider,
     
   ]
 })

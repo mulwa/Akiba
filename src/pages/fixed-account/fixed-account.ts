@@ -34,6 +34,10 @@ export class FixedAccountPage {
     if(this.user_token !=null){
        this.userDataService.getCurrentBalance(this.user_token).subscribe(data =>{
         console.log(data);
+      });
+
+      this.userDataService.getUserData(this.user_token).subscribe((data)=>{
+        console.log(data)
       }); 
 
     }

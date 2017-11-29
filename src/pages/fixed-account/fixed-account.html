@@ -19,10 +19,11 @@
         </ion-icon>
     </div>
       </ion-col>
-    <ion-col col-8>
+    <ion-col col-8>    
     <div id="tipsContent">
-     <p> This is a Fixed Save On Fixed Account And get 0.04% interest</p>   
-    </div>
+     <p> This is a Fixed Save On Fixed Account And get 0.04% interest</p> 
+       <p *ngIf="user !=null">{{user}}</p>  
+    </div>    
   </ion-col>
     </ion-row>
   </div>
