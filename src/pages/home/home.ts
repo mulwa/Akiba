@@ -12,7 +12,7 @@ import { LoadingController } from 'ionic-angular';
   selector: 'page-home',
   templateUrl: 'home.html'
 })
-export class HomePage {
+export class HomePage { 
   private signUpForm:FormGroup;
   private message:string;
 

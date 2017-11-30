@@ -15,9 +15,10 @@ export class FixedAccountProvider {
     this.headers.append('accept', 'application/json');    
     this.options = new RequestOptions({headers:this.headers});
   }
-  setFixedAccount(account:any,token:string){
-    let data = JSON.stringify(account);
-    
+  setFixedAccount(amount:number,withdrawDate,token:string){
+    let data = "amount=" + amount + "&withdraw_date="+ withdrawDate + "&token="+ token;
+        
+    return this.http.post(this.BaseUrl+"lockCash",data,this.options).map(res => res.json());    
   }
 
 }

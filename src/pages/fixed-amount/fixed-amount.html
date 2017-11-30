@@ -1,0 +1,56 @@
+<ion-header>
+  <ion-navbar color="primary">
+    <button ion-button menuToggle>
+      <ion-icon name="menu"></ion-icon>
+    </button>
+    <ion-title>Fixed Amount Savings</ion-title>
+  </ion-navbar>
+</ion-header>
+
+
+<ion-content class="whitebg">
+ <ion-grid>
+    <div class="Pagetop">
+    <ion-row>
+      <ion-col col-4>
+      <div class="iconArea">
+      <ion-icon item-start style="background-color: transparent !important">
+          <img id="banner" height="100px" src="assets/images/fixed_acc.png">
+        </ion-icon>
+    </div>
+      </ion-col>
+    <ion-col col-8>
+    <div id="tipsContent">
+     <p> This is a Fixed Save On Fixed Account And get 0.04% interest</p>   
+    </div>
+  </ion-col>
+    </ion-row>
+  </div>
+  </ion-grid> 
+  <ion-list padding>
+    <div class="formArea">
+      <form [formGroup]="fixedForm" (ngSubmit)="save()">
+        <ion-item>
+          <ion-label floating>Amount to save</ion-label>
+          <ion-input type="number" formControlName="amount"></ion-input>
+        </ion-item>
+        <ion-item>
+          <ion-label floating >Duration to Deduct</ion-label>
+          <ion-select formControlName="duration">
+            <ion-option value="daily">Daily</ion-option>
+            <ion-option value="weekly">Weekly</ion-option>
+            <ion-option value="monthly">Monthly</ion-option>
+          </ion-select>
+        </ion-item>
+        <ion-item>
+          <ion-label floating>Untill</ion-label>
+          <ion-input type="date" formControlName="untilDate"></ion-input>
+        </ion-item>
+        <ion-item>
+          <button id="btnMedium" block ion-button color="secondary" >Save</button>
+        </ion-item>
+      </form>
+    </div>
+  </ion-list>
+
+</ion-content>

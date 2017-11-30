@@ -1,3 +1,4 @@
+import { TransferPage } from './../pages/transfer/transfer';
 import { AuthProvider } from './../providers/auth/auth';
 import { Component, ViewChild } from '@angular/core';
 import { Nav, Platform } from 'ionic-angular';
@@ -26,6 +27,7 @@ export class MyApp {
     // used for an example of ngFor and navigation
     this.pages = [
       { title: 'Transaction',component: AccoutTransactionsPage },
+      { title: 'Transfer Cash',component:TransferPage},
       { title: 'Open Account', component: HomePage },
       { title: 'Login', component: LoginPage},
       { title: 'List', component: ListPage },

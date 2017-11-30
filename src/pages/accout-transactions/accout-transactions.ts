@@ -1,3 +1,5 @@
+import { FixedAmountPage } from './../fixed-amount/fixed-amount';
+import { LengoAccountPage } from './../lengo-account/lengo-account';
 import { SavingAccountPage } from './../saving-account/saving-account';
 import { FixedAccountPage } from './../fixed-account/fixed-account';
 import { ChamaPage } from './../chama/chama';
@@ -51,6 +53,14 @@ export class AccoutTransactionsPage {
           this.navCtrl.push(ChamaPage);
           break;
         }
+        case "Lengo Account":{
+          this.navCtrl.push(LengoAccountPage);
+          break;
+        }
+      case "Fixed Amount Savings":{
+        this.navCtrl.push(FixedAmountPage);
+        break;
+      }
         default:{
           console.log("invalid selection");
         }

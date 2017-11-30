@@ -1,3 +1,6 @@
+import { TransferPage } from './../pages/transfer/transfer';
+import { LengoAccountPage } from './../pages/lengo-account/lengo-account';
+import { FixedAmountPage } from './../pages/fixed-amount/fixed-amount';
 import { SavingAccountPage } from './../pages/saving-account/saving-account';
 import { FixedAccountPage } from './../pages/fixed-account/fixed-account';
 import { ChamaPage } from './../pages/chama/chama';
@@ -15,9 +18,7 @@ import { AccoutTransactionsPage }  from '../pages/accout-transactions/accout-tra
 
 import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
-// import { DatePicker } from '@ionic-native/date-picker';
-// import { DatePicker } from 'ionic2-date-picker';
-import { DatePicker } from 'ionic2-date-picker';
+import { DatePicker } from '@ionic-native/date-picker';
 import { AuthProvider } from '../providers/auth/auth';
 import { UserServiceProvider } from '../providers/user-service/user-service';
 import { IonicStorageModule,Storage} from '@ionic/storage';
@@ -38,7 +39,10 @@ import { FixedAccountProvider } from '../providers/fixed-account/fixed-account';
     ChamaPage,
     FixedAccountPage,
     SavingAccountPage,
-    DatePicker
+    FixedAmountPage,
+    LengoAccountPage,
+    TransferPage 
+    
 
   ],
   imports: [
@@ -57,7 +61,10 @@ import { FixedAccountProvider } from '../providers/fixed-account/fixed-account';
     ChamaPage,   
     FixedAccountPage,
     SavingAccountPage,
-    DatePicker
+    FixedAmountPage,
+    LengoAccountPage,
+    TransferPage 
+       
     
   ],
   providers: [

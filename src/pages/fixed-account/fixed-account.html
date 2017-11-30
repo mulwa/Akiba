@@ -4,7 +4,14 @@
     <button ion-button menuToggle>
       <ion-icon name="menu"></ion-icon>
     </button>
-    <ion-title>Fixed Savings</ion-title>
+    <ion-title>Fixed Savings</ion-title> 
+
+    <ion-buttons end *ngIf="accountBalance != null">
+     <button ion-button icon-only>
+         <ion-badge>{{accountBalance}}</ion-badge>
+     </button>
+ </ion-buttons>   
+          
   </ion-navbar>
 </ion-header>
 
@@ -29,17 +36,21 @@
   </div>
   </ion-grid> 
   <ion-list padding>
-    <ion-item>
+    <div class="formArea">
+      <form [formGroup]="fixedAccountForm" (ngSubmit)="lockAccount()" >
+        <ion-item>
       <ion-label floating>Amount</ion-label>
-      <ion-input type="number"></ion-input>
+      <ion-input type="number" formControlName="amount"></ion-input>
     </ion-item>
     <ion-item>
       <ion-label floating >Withdraw Date</ion-label>
-      <ion-datetime displayFormat="DD-MM-YYYY" [(ngModel)]="today"></ion-datetime>
+      <ion-input type="text" (input)="date = $event.target.value" [(ngModel)]="date" (click)="openDatePicker()" formControlName="withdrawDate"></ion-input>
     </ion-item>
     <ion-item>      
-        <button id="btnMedium" block right ion-button  color="secondary" (click)="saveSubmit()" type="submit">Save</button>         
+        <button id="btnMedium" block right ion-button  color="secondary" type="submit">Save</button>         
     </ion-item>
+      </form>
+    </div>
   </ion-list>
 
 </ion-content>

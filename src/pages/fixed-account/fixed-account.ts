@@ -1,9 +1,9 @@
 import { UserDataProvider } from './../../providers/user-data/user-data';
-import { Storage } from '@ionic/storage';
 import { AuthProvider } from './../../providers/auth/auth';
 import { Component } from '@angular/core';
-import { IonicPage, NavController,LoadingController,AlertController } from 'ionic-angular';
-import {FormGroup} from '@angular/forms';
+import { IonicPage, NavController,LoadingController,AlertController,ToastController  } from 'ionic-angular';
+import {FormGroup,FormBuilder,Validators} from '@angular/forms';
+import { DatePicker } from '@ionic-native/date-picker';
 
 
 @IonicPage()
@@ -11,22 +11,28 @@ import {FormGroup} from '@angular/forms';
   selector: 'page-fixed-account',
   templateUrl: 'fixed-account.html',
 })
-export class FixedAccountPage {
-  today:any;
+export class FixedAccountPage { 
   private user_token:string;
-  user:string;
+  private user:string;
+  private date;
+  private accountBalance;
+  private fixedAccountForm:FormGroup;
 
   constructor(public navCtrl: NavController,
               private loadingCtrl:LoadingController,
               private alertCtrl:AlertController,
-              private authService:AuthProvider,
-              private storage:Storage,
-              private userDataService:UserDataProvider) {
+              private authService:AuthProvider,              
+              private userDataService:UserDataProvider,
+              private datePicker:DatePicker,
+              private form_builder:FormBuilder,
+              private toastCtrl:ToastController) {
 
-      this.today = new Date().toISOString();
+      // collect currently logged in user data
       this.user_token = this.authService.getUserToken();
       this.user = this.authService.getCurrentEmail();
       console.log(this.user_token+""+this.user);
+      // initialize form
+      this.initializeform();
             
   }
 
@@ -39,13 +45,42 @@ export class FixedAccountPage {
       this.userDataService.getUserData(this.user_token).subscribe((data)=>{
         console.log(data)
       }); 
-
+      this.userDataService.getAccountBalance(this.user_token).subscribe((data)=>{
+        
+        this.accountBalance = data.account_amount;
+        console.log(this.accountBalance);
+      })
+    }else{
+      this.showToast("Please Login first");
     }
     
   }
+  initializeform(){
+    this.fixedAccountForm = this.form_builder.group({
+      amount:['',Validators.required],
+      withdrawDate:['',Validators.required]
+    });
 
-  saveSubmit(){
+  }
+  openDatePicker(){
+    console.log("opening date picker");
+    this.datePicker.show({
+      date: new Date(),
+      mode: 'date',
+      androidTheme:this.datePicker.ANDROID_THEMES.THEME_HOLO_DARK
+    }).then((date)=>{
+      this.date = date;
+      console.log("date"+date);
+
+    },error =>{
+      console.log("error"+error);
+    });
+    
+  }
+
+  lockAccount(){
     this.showLoading("Saving Fixed Account");
+    console.log(this.fixedAccountForm.value)
   }
 
     
@@ -67,6 +102,14 @@ export class FixedAccountPage {
     });
     alert.present();
     
+  }
+  showToast(msg:string){
+    let toast = this.toastCtrl.create({
+      message:  msg,
+      duration: 3000,
+      position: 'bottom'
+    });
+    toast.present();
   }
 
 }
