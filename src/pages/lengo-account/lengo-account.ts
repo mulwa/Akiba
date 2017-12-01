@@ -1,7 +1,8 @@
+import { LoginPage } from './../login/login';
 import { AuthProvider } from './../../providers/auth/auth';
 import { UserDataProvider } from './../../providers/user-data/user-data';
 import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams } from 'ionic-angular';
+import { IonicPage, NavController,ToastController } from 'ionic-angular';
 import { FormGroup, FormBuilder,Validators} from '@angular/forms';
 
 
@@ -18,12 +19,20 @@ export class LengoAccountPage {
   constructor(public navCtrl: NavController, 
               private formBuilder:FormBuilder,
               private userDataProvider: UserDataProvider,
-              private auth:AuthProvider) {
+              private auth:AuthProvider,
+              private toastCtlr:ToastController) {
 
   this.user_token = this.auth.getUserToken();
   console.log("tOKEN"+this.user_token);
   // initialize form here
   this.initializeForm();
+}
+
+ionViewCanEnter():boolean {
+    if(this.auth.getUserToken() ==null){
+      return false;
+    }
+    return true;
   }
 
   ionViewDidLoad(){
@@ -37,6 +46,9 @@ export class LengoAccountPage {
       },error =>{
         console.log("an error has occured"+error);
       })
+    }else{
+      this.navCtrl.setRoot(LoginPage);
+      this.showToast("Please Login First");
     }
     
   }
@@ -51,15 +63,20 @@ export class LengoAccountPage {
   setLengo(){
     console.log(this.lengoForm.value);
     if(this.validateAmount(this.lengoForm.value.amount)){
-      console.log("continue"+this.lengoForm.value.amount );
+      
     }else{
-      console.log("failed you entered" +this.lengoForm.value.amount+ "Available"+this.accountBalance);
+      this.showToast("You dont have enough money to complete this Transaction, Current balance is"+this.accountBalance);
     }
   }
+  showToast(msg:string){
+    let toast = this.toastCtlr.create({
+      message : msg,
+      duration : 5000,
+      position : 'bottom'
+    });
+    toast.present();
+  }
   validateAmount(userAmount):boolean{
-    if(userAmount > this.accountBalance){
-      return false;
-    }
-    return true;
+     return userAmount <= Math.round(this.accountBalance); 
   }
 }

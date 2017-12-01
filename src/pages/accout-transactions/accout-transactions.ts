@@ -1,3 +1,4 @@
+import { AuthProvider } from './../../providers/auth/auth';
 import { FixedAmountPage } from './../fixed-amount/fixed-amount';
 import { LengoAccountPage } from './../lengo-account/lengo-account';
 import { SavingAccountPage } from './../saving-account/saving-account';
@@ -18,7 +19,9 @@ export class AccoutTransactionsPage {
   private accountType;
   
 
-  constructor(public navCtrl: NavController, public navParams: NavParams) {
+  constructor(public navCtrl: NavController, 
+              public navParams: NavParams,
+              private authProvider: AuthProvider) {
     this.accountType=[
       { name:"Fixed Account",icon:"fixed_acc.png"},
       { name:'Savings Account', icon:'savings_acc.png'},
@@ -28,9 +31,15 @@ export class AccoutTransactionsPage {
     ];
     
   }
+  ionViewCanEnter():boolean{
+    if(this.authProvider.getUserToken() ==null){
+      return false;
+    }
+    return true;
+  }
 
   ionViewDidLoad() {
-    console.log('ionViewDidLoad AccoutTransactionsPage');
+   
   }
   openTransaction(item){
     this.navigateAccount(item);

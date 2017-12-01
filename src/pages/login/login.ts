@@ -1,9 +1,10 @@
+import { HomePage } from './../home/home';
 import { AuthProvider } from './../../providers/auth/auth';
 import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams, LoadingController, AlertController } from 'ionic-angular';
+import { IonicPage, NavController, NavParams, LoadingController, AlertController,ToastController } from 'ionic-angular';
 import { Validators, FormGroup, FormBuilder} from '@angular/forms';
 import {User} from '../../models/User';
-
+import { Network } from '@ionic-native/network';
 
 
 
@@ -23,12 +24,17 @@ export class LoginPage {
               private form_builder:FormBuilder,
               private loadingCtrl:LoadingController,
               private alertCtrl:AlertController,
-              private authService:AuthProvider) { 
+              private authService:AuthProvider,
+              private toastCtrl:ToastController,
+              private network:Network) { 
     this.initializeForm();   
   }
 
   ionViewDidLoad() {
-    console.log('ionViewDidLoad LoginPage');
+   this.network.onDisconnect().subscribe(()=>{
+     this.showToast("You Dont have Connection");
+
+   })
      
   }
   initializeForm(){
@@ -63,9 +69,7 @@ export class LoginPage {
       this.loading.dismissAll();
       this.showAlert("Login  Status",this.loginStatus);  
     });   
-  });   
-          
-      
+  });      
     
   }
 
@@ -75,8 +79,20 @@ export class LoginPage {
       subTitle:msg,
       buttons:['Ok']
     });
-    alert.present();
-    
+    alert.present();    
+  }
+  showToast(msg:string){
+    let toast = this.toastCtrl.create({
+      message : msg,
+      duration : 5000,
+      position : 'bottom'
+    });
+    toast.present();
+  }
+
+  openAccount(){
+    this.navCtrl.setRoot(HomePage);
+    console.log("open Account called");
   }
 
 }

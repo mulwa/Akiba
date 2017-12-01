@@ -1,9 +1,10 @@
+import { LoginPage } from './../login/login';
 import { UserDataProvider } from './../../providers/user-data/user-data';
 import { AuthProvider } from './../../providers/auth/auth';
 import { Component } from '@angular/core';
-import { IonicPage, NavController,LoadingController,AlertController,ToastController  } from 'ionic-angular';
+import { IonicPage, NavController,Nav,LoadingController,AlertController,ToastController  } from 'ionic-angular';
 import {FormGroup,FormBuilder,Validators} from '@angular/forms';
-import { DatePicker } from '@ionic-native/date-picker';
+// import { DatePicker } from '@ionic-native/date-picker';
 
 
 @IonicPage()
@@ -13,18 +14,18 @@ import { DatePicker } from '@ionic-native/date-picker';
 })
 export class FixedAccountPage { 
   private user_token:string;
-  private user:string;
-  private date;
+  private user:string;  
   private accountBalance;
   private fixedAccountForm:FormGroup;
+  private accountArray:any =[];
 
   constructor(public navCtrl: NavController,
               private loadingCtrl:LoadingController,
               private alertCtrl:AlertController,
               private authService:AuthProvider,              
-              private userDataService:UserDataProvider,
-              private datePicker:DatePicker,
+              private userDataService:UserDataProvider,             
               private form_builder:FormBuilder,
+              private nav: Nav,
               private toastCtrl:ToastController) {
 
       // collect currently logged in user data
@@ -35,11 +36,21 @@ export class FixedAccountPage {
       this.initializeform();
             
   }
+  
+  ionViewCanEnter():boolean {
+    if(this.authService.getUserToken() ==null){
+      return false;
+    }else{
+      return true;
+    }    
+  }
 
   ionViewDidLoad() {
     if(this.user_token !=null){
-       this.userDataService.getCurrentBalance(this.user_token).subscribe(data =>{
-        console.log(data);
+       this.userDataService.getCurrentBalance(this.user_token).subscribe(data =>{       
+        data.forEach(element => {          
+          this.accountArray.push(element);
+        });
       });
 
       this.userDataService.getUserData(this.user_token).subscribe((data)=>{
@@ -52,35 +63,35 @@ export class FixedAccountPage {
       })
     }else{
       this.showToast("Please Login first");
+     
     }
     
   }
   initializeform(){
     this.fixedAccountForm = this.form_builder.group({
-      amount:['',Validators.required],
-      withdrawDate:['',Validators.required]
+      amount :['',Validators.required],
+      withdraw_date :['',Validators.required],
+      token :[this.user_token] 
     });
 
   }
-  openDatePicker(){
-    console.log("opening date picker");
-    this.datePicker.show({
-      date: new Date(),
-      mode: 'date',
-      androidTheme:this.datePicker.ANDROID_THEMES.THEME_HOLO_DARK
-    }).then((date)=>{
-      this.date = date;
-      console.log("date"+date);
+  
 
-    },error =>{
-      console.log("error"+error);
-    });
+  lockAccount(){ 
+    console.log(this.accountArray);   
+    console.log(this.fixedAccountForm.value);
+    console.log(this.validateAmount(this.fixedAccountForm.value.amount));
     
-  }
+    if(this.validateAmount(this.fixedAccountForm.value.amount)){
+      console.log("good to go");
 
-  lockAccount(){
-    this.showLoading("Saving Fixed Account");
-    console.log(this.fixedAccountForm.value)
+    }else{
+      this.showToast("You dont have enough money to complete this Transaction, Your current Balance is" + this.accountBalance);
+    }
+  }
+  validateAmount(userAmount:number):boolean{
+    return userAmount <= Math.round(this.accountBalance);    
+    
   }
 
     
@@ -106,7 +117,7 @@ export class FixedAccountPage {
   showToast(msg:string){
     let toast = this.toastCtrl.create({
       message:  msg,
-      duration: 3000,
+      duration: 5000,
       position: 'bottom'
     });
     toast.present();

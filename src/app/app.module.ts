@@ -19,6 +19,7 @@ import { AccoutTransactionsPage }  from '../pages/accout-transactions/accout-tra
 import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
 import { DatePicker } from '@ionic-native/date-picker';
+import { Network } from '@ionic-native/network';
 import { AuthProvider } from '../providers/auth/auth';
 import { UserServiceProvider } from '../providers/user-service/user-service';
 import { IonicStorageModule,Storage} from '@ionic/storage';
@@ -63,14 +64,14 @@ import { FixedAccountProvider } from '../providers/fixed-account/fixed-account';
     SavingAccountPage,
     FixedAmountPage,
     LengoAccountPage,
-    TransferPage 
-       
+    TransferPage        
     
   ],
   providers: [
     StatusBar,
     SplashScreen,
-    DatePicker,    
+    DatePicker,
+    Network,    
     {provide: ErrorHandler, useClass: IonicErrorHandler},
     AuthProvider,   
     UserServiceProvider,

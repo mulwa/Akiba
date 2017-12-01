@@ -7,6 +7,11 @@
   </ion-navbar>
 </ion-header>
 <ion-content padding class="whitebg">
+  <div class="iconArea">
+    <ion-icon>
+    <img  src="assets/images/Akiba_logo.png">
+    </ion-icon>
+  </div>
   <ion-list>
     <form [formGroup]="loginForm" (ngSubmit)="login()">
       <ion-item>
@@ -22,7 +27,7 @@
       </ion-item>
     </form>
     <ion-item>
-      <button block id="btnMedium" ion-button outline >Create Account</button>
+      <button block id="btnMedium" ion-button outline (click)="openAccount()" >Create Account</button>
     </ion-item>
   </ion-list>
 </ion-content>

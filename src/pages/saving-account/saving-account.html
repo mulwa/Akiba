@@ -33,21 +33,33 @@
   </div>
   </ion-grid> 
   <ion-list padding>
-    <ion-item>
-      <ion-label floating>Percentage</ion-label>
-      <ion-input type="text"></ion-input>
-    </ion-item>
-    <ion-item>
-      <ion-label floating >Duration to Deduct</ion-label>
-      <ion-input type="text"></ion-input>
-    </ion-item>
-    <ion-item>
-      <ion-label floating>Withdrawal Date</ion-label>
-      <ion-input type="text" (click)="showDatePicker()"></ion-input>
-    </ion-item>
-    <ion-item>
-      <button id="btnMedium" block ion-button color="secondary" type="submit">Save</button>
-    </ion-item>
+    <div class="formArea">
+      <form [formGroup]="savingForm" (ngSubmit)="save()" >
+        <ion-item>
+          <ion-label floating>Amount </ion-label>
+          <ion-input  type="number" formControlName="amount"></ion-input>
+        </ion-item>
+        <ion-item>
+          <ion-label floating>Percentage</ion-label>
+          <ion-input type="number" formControlName="percentage"></ion-input>
+        </ion-item>
+        <ion-item>
+          <ion-label floating >Duration to Deduct</ion-label>
+          <ion-select formControlName="duration">
+            <ion-option value="daily">Daily</ion-option>
+            <ion-option value="weekly">Weekly</ion-option>
+            <ion-option value="monthly">Monthly</ion-option>
+          </ion-select>
+        </ion-item>
+        <ion-item>
+          <ion-label floating>Withdrawal Date</ion-label>
+          <ion-input type="date" formControlName="wdate"></ion-input>
+        </ion-item>
+        <ion-item>
+          <button id="btnMedium" block ion-button color="secondary" type="submit">Save</button>
+        </ion-item>
+      </form>
+    </div>
   </ion-list>
 
 </ion-content>

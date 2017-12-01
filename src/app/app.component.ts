@@ -1,14 +1,12 @@
+import { LoginPage } from './../pages/login/login';
 import { TransferPage } from './../pages/transfer/transfer';
 import { AuthProvider } from './../providers/auth/auth';
 import { Component, ViewChild } from '@angular/core';
 import { Nav, Platform } from 'ionic-angular';
 import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
-
-
 import { HomePage } from '../pages/home/home';
 import { ListPage } from '../pages/list/list';
-import { LoginPage } from  '../pages/login/login';
 import { AccoutTransactionsPage }  from '../pages/accout-transactions/accout-transactions';
 
 @Component({
@@ -17,7 +15,7 @@ import { AccoutTransactionsPage }  from '../pages/accout-transactions/accout-tra
 export class MyApp {
   @ViewChild(Nav) nav: Nav;
 
-  rootPage: any = HomePage;
+  rootPage: any = LoginPage;
 
   pages: Array<{title: string, component: any}>;
 
@@ -28,10 +26,10 @@ export class MyApp {
     this.pages = [
       { title: 'Transaction',component: AccoutTransactionsPage },
       { title: 'Transfer Cash',component:TransferPage},
-      { title: 'Open Account', component: HomePage },
-      { title: 'Login', component: LoginPage},
+      { title: 'Open Account', component: HomePage },      
       { title: 'List', component: ListPage },
-      { title: 'Logout',component: null}
+      { title:  'Logout', component: null}
+      
     ];
 
   }

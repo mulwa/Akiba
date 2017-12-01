@@ -1,3 +1,4 @@
+import { LoginPage } from './../login/login';
 import { UserDataProvider } from './../../providers/user-data/user-data';
 import { AuthProvider } from './../../providers/auth/auth';
 import { Component } from '@angular/core';
@@ -24,6 +25,13 @@ export class FixedAmountPage {
     this.initializeForm();
   }
 
+  ionViewCanEnter():boolean {
+    if(this.auth.getUserToken() ==null){
+      return false;
+    }
+    return true;
+  }
+
   ionViewDidLoad() {
     if(this.user_token !=null){
       this.userDataService.getAccountBalance(this.user_token).subscribe(data =>{
@@ -31,9 +39,9 @@ export class FixedAmountPage {
         console.log(data);
       })
 
-    }else{
-      console.log("please log in first");
+    }else{      
       this.showToast("Please Login first");
+      this.navCtrl.setRoot(LoginPage);
     }
     
   } //end ionViewDidLoad
@@ -49,23 +57,20 @@ export class FixedAmountPage {
     if(this.validateAmount(this.fixedForm.value.amount)){
 
     }else{
-      this.showToast("You dont have enough money to complete this Transaction ");
+      this.showToast("You dont have enough money to complete this Transaction, Current balance is"+this.accountBalance);
     }
     console.log(this.fixedForm.value);
   }
   showToast(msg:string){
     let toast = this.toastCtrl.create({
       message : msg,
-      duration : 3000,
+      duration : 5000,
       position : 'bottom'
     });
     toast.present();
   }
   validateAmount(userAmount):boolean{
-    if(userAmount > this.accountBalance){
-      return false;
-    }
-    return true;
+     return userAmount <= Math.round(this.accountBalance); 
   }
 
 }

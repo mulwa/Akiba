@@ -44,10 +44,10 @@
     </ion-item>
     <ion-item>
       <ion-label floating >Withdraw Date</ion-label>
-      <ion-input type="text" (input)="date = $event.target.value" [(ngModel)]="date" (click)="openDatePicker()" formControlName="withdrawDate"></ion-input>
+      <ion-input type="date" formControlName="withdraw_date"></ion-input>
     </ion-item>
     <ion-item>      
-        <button id="btnMedium" block right ion-button  color="secondary" type="submit">Save</button>         
+        <button id="btnMedium" block right ion-button  color="secondary" type="submit">Lock</button>         
     </ion-item>
       </form>
     </div>
