@@ -5,12 +5,12 @@
       <ion-icon name="menu"></ion-icon>
     </button>
     <ion-title>Fixed Savings</ion-title> 
-
+    
     <ion-buttons end *ngIf="accountBalance != null">
-     <button ion-button icon-only>
-         <ion-badge>{{accountBalance}}</ion-badge>
-     </button>
- </ion-buttons>   
+      <button ion-button icon-only>
+          <ion-badge color="secondary">{{accountBalance}}</ion-badge>
+      </button>
+    </ion-buttons>   
           
   </ion-navbar>
 </ion-header>
@@ -47,7 +47,7 @@
       <ion-input type="date" formControlName="withdraw_date"></ion-input>
     </ion-item>
     <ion-item>      
-        <button id="btnMedium" block right ion-button  color="secondary" type="submit">Lock</button>         
+        <button id="btnMedium" block right ion-button [disabled]="!fixedAccountForm.valid"  color="secondary" type="submit">Lock</button>         
     </ion-item>
       </form>
     </div>

@@ -10,6 +10,12 @@
       <ion-icon name="menu"></ion-icon>
     </button>
     <ion-title>Savings Account</ion-title>
+    <ion-buttons end *ngIf="accountBalance != null">
+      <button ion-button icon-only>
+          <ion-badge color="secondary">{{accountBalance}}</ion-badge>
+      </button>
+    </ion-buttons> 
+
   </ion-navbar>
 </ion-header>
 

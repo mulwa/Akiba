@@ -55,8 +55,9 @@ ionViewCanEnter():boolean {
   initializeForm(){
     this.lengoForm = this.formBuilder.group({
       target:['',Validators.required],
-      amount:['',Validators.required],
-      period:['',Validators.required]
+      contr_amount:['',Validators.required],
+      deductioperiod:['',Validators.required],
+      token:[this.user_token]
 
     });
   }

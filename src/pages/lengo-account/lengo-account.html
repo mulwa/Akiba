@@ -4,6 +4,11 @@
       <ion-icon name="menu"></ion-icon>
     </button>
     <ion-title>Lengo Account</ion-title>
+    <ion-buttons end *ngIf="accountBalance != null">
+      <button ion-button icon-only>
+          <ion-badge color="secondary">{{accountBalance}}</ion-badge>
+      </button>
+    </ion-buttons>  
   </ion-navbar>
 </ion-header>
 
@@ -35,18 +40,18 @@
         </ion-item>
         <ion-item>
           <ion-label floating >Contribution Amount</ion-label>
-          <ion-input formControlName="amount" type="number"></ion-input>
+          <ion-input formControlName="contr_amount" type="number"></ion-input>
         </ion-item>
         <ion-item>
           <ion-label floating>Deduction Period</ion-label>
-          <ion-select formControlName="period">
-            <ion-option value="daily">Daily</ion-option>
-            <ion-option value="weekly">Weekly</ion-option>
-            <ion-option value="monthly">Monthly</ion-option>
+          <ion-select formControlName="deductioperiod">
+            <ion-option value="1">Daily</ion-option>
+            <ion-option value="7">Weekly</ion-option>
+            <ion-option value="30">Monthly</ion-option>
           </ion-select>
         </ion-item>
         <ion-item>
-          <button id="btnMedium" block ion-button color="secondary" type="submit">Save</button>
+          <button id="btnMedium" block ion-button color="secondary" [disabled]="!lengoForm.valid" >Save</button>
         </ion-item>
       </form>
     </div>

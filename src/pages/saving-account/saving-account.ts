@@ -37,8 +37,10 @@ export class SavingAccountPage {
 
   ionViewDidLoad() {
     if(this.user_token !=null){
-      this.userDataProvider.getCurrentBalance(this.user_token).subscribe(data =>{
+      this.userDataProvider.getAccountBalance(this.user_token).subscribe(data =>{
+        console.log(data);
         this.accountBalance = data.account_amount;
+        console.log("form saving"+this.accountBalance);
       });
 
     }else{

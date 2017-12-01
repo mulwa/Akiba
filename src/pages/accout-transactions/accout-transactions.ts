@@ -1,3 +1,4 @@
+import { LoginPage } from './../login/login';
 import { AuthProvider } from './../../providers/auth/auth';
 import { FixedAmountPage } from './../fixed-amount/fixed-amount';
 import { LengoAccountPage } from './../lengo-account/lengo-account';
@@ -31,14 +32,11 @@ export class AccoutTransactionsPage {
     ];
     
   }
-  ionViewCanEnter():boolean{
-    if(this.authProvider.getUserToken() ==null){
-      return false;
-    }
-    return true;
-  }
 
   ionViewDidLoad() {
+    if(this.authProvider.getUserToken() ==null){
+      this.navCtrl.setRoot(LoginPage);
+    }  
    
   }
   openTransaction(item){

@@ -1,3 +1,4 @@
+import { AccoutTransactionsPage } from './../accout-transactions/accout-transactions';
 import { HomePage } from './../home/home';
 import { AuthProvider } from './../../providers/auth/auth';
 import { Component } from '@angular/core';
@@ -53,6 +54,8 @@ export class LoginPage {
       if(data.status == "success"){
        this.authService.storeUserCredential(data.user.email,data.token);
        this.loginStatus ="Welcome " + data.user.name+"";
+       
+       this.navCtrl.setRoot(AccoutTransactionsPage);
        
 
       }else{

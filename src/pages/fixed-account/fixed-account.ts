@@ -18,6 +18,7 @@ export class FixedAccountPage {
   private accountBalance;
   private fixedAccountForm:FormGroup;
   private accountArray:any =[];
+  private isenabled:boolean=false;
 
   constructor(public navCtrl: NavController,
               private loadingCtrl:LoadingController,
@@ -64,7 +65,7 @@ export class FixedAccountPage {
     }else{
       this.showToast("Please Login first");
      
-    }
+    }    
     
   }
   initializeform(){
@@ -121,6 +122,14 @@ export class FixedAccountPage {
       position: 'bottom'
     });
     toast.present();
+  }
+  // disable button to wait current balance to load
+  ActualBalaceLoaded(){    
+    if(this.accountBalance !==null){
+      this.isenabled = true;
+    }else{
+      this.isenabled = false;
+    }
   }
 
 }
