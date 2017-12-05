@@ -23,11 +23,11 @@
         <ion-input type="password" formControlName="password" ></ion-input>
       </ion-item>
       <ion-item>
-        <button id="btnMedium" block ion-button color="secondary" type="submit">Login</button>
+        <button id="btnMedium" block ion-button color="secondary" [disabled]="!loginForm.valid" type="submit">Login</button>
       </ion-item>
     </form>
     <ion-item>
-      <button block id="btnMedium" ion-button outline (click)="openAccount()" >Create Account</button>
+      <button block id="btnMedium" ion-button outline  (click)="openAccount()"  >Create Account</button>
     </ion-item>
   </ion-list>
 </ion-content>
