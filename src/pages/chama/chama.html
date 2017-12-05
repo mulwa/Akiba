@@ -35,16 +35,39 @@
     </ion-row>
   </div>
   </ion-grid> 
-  <ion-list padding>
+  <!--start of ion-segment-->
+  <div padding>
+  <ion-segment [(ngModel)]="chama">
+    <ion-segment-button value="accounts">
+      Accounts <ion-badge item-end>5</ion-badge>
+    </ion-segment-button>
+    <ion-segment-button value="requests">
+      Requests <ion-badge item-end>0</ion-badge>
+    </ion-segment-button>
+  </ion-segment>
+</div>
+<div [ngSwitch]="chama">
+  <!--start accounts segment-->  
+  <ion-list *ngSwitchCase="'accounts'">
+    <ion-searchbar (ionInput)="getChama($event)"></ion-searchbar>
+    <!--end ion-searchbar-->
     <ion-item *ngFor="let item of mychamas">
       <ion-avatar item-start>
         <img src="assets/images/icon.png">
       </ion-avatar>
       <h2>{{item.name}}</h2>
-      <ion-badge item-end>{{item.members}}</ion-badge>
+      <!--<ion-badge item-end>{{item.members}}</ion-badge>-->
+    </ion-item> 
+    ...
+  </ion-list>
+  
+  <!--start request ion-segment-->
+  <ion-list *ngSwitchCase="'requests'">
+    <ion-item>
+      <ion-buttons>you dont have Any chama request</ion-buttons>      
     </ion-item>    
   </ion-list>
+</div>  
 </ion-content>
 
-<!--<button class="nopaddingList" ion-item *ngFor="let item of mychamas">
-      {{item}} <ion-badge item-end>260k</ion-badge></button>  -->
+
