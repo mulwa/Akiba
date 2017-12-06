@@ -1,7 +1,10 @@
 page-chama {
     .floatingBtn{
         margin-top:20px;
-        margin-bottom: 20px;    
+        // margin-bottom: 20px;    
+    }
+    ion-segment-button{
+        text-transform: none;
     }
     
 

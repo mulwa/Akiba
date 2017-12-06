@@ -1,3 +1,4 @@
+import { ChamaDetailsPage } from './../pages/chama-details/chama-details';
 import { TransferPage } from './../pages/transfer/transfer';
 import { LengoAccountPage } from './../pages/lengo-account/lengo-account';
 import { FixedAmountPage } from './../pages/fixed-amount/fixed-amount';
@@ -42,7 +43,8 @@ import { FixedAccountProvider } from '../providers/fixed-account/fixed-account';
     SavingAccountPage,
     FixedAmountPage,
     LengoAccountPage,
-    TransferPage 
+    TransferPage,
+    ChamaDetailsPage 
     
 
   ],
@@ -64,7 +66,8 @@ import { FixedAccountProvider } from '../providers/fixed-account/fixed-account';
     SavingAccountPage,
     FixedAmountPage,
     LengoAccountPage,
-    TransferPage        
+    TransferPage,
+    ChamaDetailsPage        
     
   ],
   providers: [

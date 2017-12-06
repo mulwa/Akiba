@@ -32,20 +32,23 @@
   <!--start of ion-segment-->
   <div padding>
   <ion-segment [(ngModel)]="chama">
-    <ion-segment-button value="accounts">
-      Accounts <ion-badge item-end>5</ion-badge>
+    <ion-segment-button value="myaccounts" style="text-transform: none">
+      My Chamas <ion-badge item-end>5</ion-badge>
     </ion-segment-button>
-    <ion-segment-button value="requests">
+    <ion-segment-button value="requests" style="text-transform: none">
       Requests <ion-badge item-end>0</ion-badge>
+    </ion-segment-button>
+    <ion-segment-button value="join_chama" style="text-transform: none">
+      Join chama
     </ion-segment-button>
   </ion-segment>
 </div>
 <div [ngSwitch]="chama">
   <!--start accounts segment-->  
-  <ion-list *ngSwitchCase="'accounts'">
+  <ion-list *ngSwitchCase="'myaccounts'">
     <ion-searchbar (ionInput)="getChama($event)"></ion-searchbar>
     <!--end ion-searchbar-->
-    <ion-item *ngFor="let item of mychamas">
+    <ion-item *ngFor="let item of mychamas" (click)="showMore(item)" >
       <ion-avatar item-start>
         <img src="assets/images/icon.png">
       </ion-avatar>
@@ -54,7 +57,7 @@
     </ion-item>
     <div class="floatingBtn">
       <ion-fab end>
-        <button ion-fab fab-min color="secondary"  icon-only><ion-icon name="add"></ion-icon></button>
+        <button ion-fab fab-min color="secondary" (click)="addChama()" icon-only><ion-icon name="add"></ion-icon></button>
       </ion-fab>
     </div>
   </ion-list>
@@ -65,7 +68,18 @@
       <ion-buttons>you dont have Any chama request</ion-buttons>      
     </ion-item>    
   </ion-list>
-</div>  
+
+  <ion-list *ngSwitchCase="'join_chama'">
+    <ion-searchbar (ionInput)="getChama($event)"></ion-searchbar>
+    <ion-item *ngFor="let item of mychamas">
+      <h3>{{item.name}}</h3>
+      <button ion-button color="secondary" item-end (click)="joinRequest(item)" >Join</button>
+    </ion-item>
+  </ion-list>
+
+  
+</div> 
+<!--ngSwitch-->
 </ion-content>
 
 
