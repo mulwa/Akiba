@@ -28,6 +28,7 @@ import { UserDataProvider } from '../providers/user-data/user-data';
 import { RegistrationProvider } from '../providers/registration/registration';
 import { FixedAccountProvider } from '../providers/fixed-account/fixed-account';
 import { ChamaProvider } from '../providers/chama/chama';
+import { Contacts} from '@ionic-native/contacts';
 
 
 
@@ -75,6 +76,7 @@ import { ChamaProvider } from '../providers/chama/chama';
     StatusBar,
     SplashScreen,
     DatePicker,
+    Contacts,
     Network,    
     {provide: ErrorHandler, useClass: IonicErrorHandler},
     AuthProvider,   
