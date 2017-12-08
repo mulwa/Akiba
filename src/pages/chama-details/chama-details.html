@@ -13,9 +13,9 @@
     <ion-row>
       <ion-col col-4>
       <div class="iconArea">
-      <!--<ion-icon item-start style="background-color: transparent !important">
+      <ion-icon item-start style="background-color: transparent !important">
           <img id="banner" height="100px" src="assets/images/chama_acc.png">
-        </ion-icon>-->
+        </ion-icon>
     </div>
       </ion-col>
     <ion-col col-8>
@@ -27,6 +27,18 @@
   </div>
   </ion-grid> 
   <div>
+    <ion-grid>
+    <ion-row>
+      <ion-col *ngFor="let trans of chamaTransactions" col-6>
+        <div id="transArea">
+          <div class="transIcon">
+            <img style="height: 50px"  src="assets/images/chama_acc.png">            
+          </div>
+          {{trans.name}}
+        </div>
+      </ion-col>      
+    </ion-row>
+  </ion-grid>
     
 
   </div>

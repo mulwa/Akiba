@@ -1,7 +1,9 @@
 import { ChamaDetailsPage } from './../chama-details/chama-details';
 import { Component } from '@angular/core';
-import { IonicPage, NavController,AlertController,ToastController} from 'ionic-angular';
-
+import { IonicPage, NavController, AlertController, ToastController, LoadingController } from 'ionic-angular';
+import { ChamaProvider } from "../../providers/chama/chama";
+import { UserDataProvider } from './../../providers/user-data/user-data';
+import { AuthProvider } from './../../providers/auth/auth';
 
 
 
@@ -13,18 +15,38 @@ import { IonicPage, NavController,AlertController,ToastController} from 'ionic-a
 export class ChamaPage {
   private mychamas:any[];
   private chama:string; 
+  private user_token:string;
+  private accountBalance:any;
+  private user:string;
 
   constructor(public navCtrl: NavController,
                private alertCtrl: AlertController,
-               private toastCtrl:ToastController) {
-    this.chama = "myaccounts";   
-
-    this.initializeChamas();   
+               private toastCtrl:ToastController,
+               private chamaService : ChamaProvider,
+               private authService: AuthProvider,
+               private userDataService: UserDataProvider,
+               private loadingCtrl : LoadingController) {
+    this.chama = "myaccounts"; 
+    this.initializeChamas(); 
+    this.user_token = this.authService.getUserToken();
+    this.user = this.authService.getCurrentEmail();
+    console.log(this.user_token);
   }
-  
+  ionViewCanEnter():boolean {
+    if(this.authService.getUserToken() ==null){
+      return false;
+    }else{
+      return true;
+    }    
+  } 
 
   ionViewDidLoad() {
-    console.log('ionViewDidLoad ChamaPage');
+    if(this.user_token !== null){
+      this.userDataService.getCurrentBalance(this.user_token).subscribe(data =>{       
+        console.log(data);
+      });
+    }
+    
   }
   initializeChamas(){
     this.mychamas = [
@@ -54,7 +76,7 @@ export class ChamaPage {
       title:'Creat New Chama',
       inputs :[
         {
-          name:'name',
+          name:'account_name,',
           placeholder:'Chama Name'
         }
       ],
@@ -69,10 +91,11 @@ export class ChamaPage {
         {
           text: 'Save',
           handler: data =>{
-            if(data.name ==''){ 
+            if(data.account_name ==''){ 
               this.showToast(" Chama Name Can't be Empty Please provide One");             
               return false;
             }
+            this.savaChama(data.account_name,this.user_token);
           }
         }
       ]
@@ -86,6 +109,28 @@ export class ChamaPage {
       position : 'bottom'
     });
     toast.present();
+  }
+  savaChama(name,token){
+    let loader=this.loadingCtrl.create({
+      content:"Creating New Chama",
+      duration:1000
+    });
+    loader.present().then(() =>{
+      this.chamaService.createChama(name,token).subscribe(data =>{
+        console.log(data);
+        if(data.status == 'success'){
+          this.showToast(data.message);
+        }
+      },error =>{
+        console.log("error occured"+error);
+        this.showToast("please Try again Later");
+      },()=>{
+        console.log("complete called");
+        loader.dismissAll();
+      })
+
+    });
+    
   }
   showMore(chama){
     console.log("navigating to"+chama.name);

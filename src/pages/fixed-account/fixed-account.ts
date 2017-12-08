@@ -16,8 +16,7 @@ export class FixedAccountPage {
   private user_token:string;
   private user:string;  
   private accountBalance;
-  private fixedAccountForm:FormGroup;
-  private accountArray:any =[];
+  private fixedAccountForm:FormGroup; 
   private isenabled:boolean=false;
 
   constructor(public navCtrl: NavController,
@@ -77,8 +76,7 @@ export class FixedAccountPage {
   }
   
 
-  lockAccount(){ 
-    console.log(this.accountArray);   
+  lockAccount(){      
     console.log(this.fixedAccountForm.value);
     console.log(this.validateAmount(this.fixedAccountForm.value.amount));
     

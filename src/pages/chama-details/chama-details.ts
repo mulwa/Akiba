@@ -8,9 +8,17 @@ import { IonicPage, NavController, NavParams } from 'ionic-angular';
 })
 export class ChamaDetailsPage {
   chamaname:string;
+  chamaTransactions:any;
+  
 
   constructor(public navCtrl: NavController, public navParams: NavParams) {
     this.chamaname = this.navParams.get('name');
+    this.chamaTransactions = [
+      { name:"Request Loan"},
+      { name: "Deposit"},
+      { name: "Members"},
+      { name: "Transactions"}
+    ]
   }
 
   ionViewDidLoad() {

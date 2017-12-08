@@ -27,6 +27,7 @@ import { IonicStorageModule,Storage} from '@ionic/storage';
 import { UserDataProvider } from '../providers/user-data/user-data';
 import { RegistrationProvider } from '../providers/registration/registration';
 import { FixedAccountProvider } from '../providers/fixed-account/fixed-account';
+import { ChamaProvider } from '../providers/chama/chama';
 
 
 
@@ -81,6 +82,7 @@ import { FixedAccountProvider } from '../providers/fixed-account/fixed-account';
     UserDataProvider,
     RegistrationProvider,
     FixedAccountProvider,
+    ChamaProvider,
     
   ]
 })
