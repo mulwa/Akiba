@@ -49,15 +49,14 @@ export class FixedAccountPage {
   ionViewDidLoad() {
     if(this.user_token !=null){
        this.userDataService.getCurrentBalance(this.user_token).subscribe(data =>{       
-        data.forEach(element => {          
-          this.accountArray.push(element);
-        });
+        console.log(data);
       });
 
       this.userDataService.getUserData(this.user_token).subscribe((data)=>{
         console.log(data)
       }); 
       this.userDataService.getAccountBalance(this.user_token).subscribe((data)=>{
+        console.log(data);
         
         this.accountBalance = data.account_amount;
         console.log(this.accountBalance);
