@@ -14,10 +14,10 @@ export class ChamaDetailsPage {
   constructor(public navCtrl: NavController, public navParams: NavParams) {
     this.chamaname = this.navParams.get('name');
     this.chamaTransactions = [
-      { name:"Request Loan"},
-      { name: "Deposit"},
-      { name: "Members"},
-      { name: "Transactions"}
+      { name:"Request Loan", icon : "loan.png"},
+      { name: "Deposit", icon : "deposit.png"},
+      { name: "Members" , icon : "members.png"},
+      { name: "Reports", icon : "reports.png"}
     ]
   }
 

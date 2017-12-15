@@ -32,7 +32,7 @@
       <ion-col *ngFor="let trans of chamaTransactions" col-6>
         <div id="transArea">
           <div class="transIcon">
-            <img style="height: 50px"  src="assets/images/chama_acc.png">            
+            <img style="height: 50px"  src="assets/images/{{trans.icon}}">            
           </div>
           {{trans.name}}
         </div>

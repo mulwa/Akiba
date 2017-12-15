@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { IonicPage, NavController,AlertController,ToastController  } from 'ionic-angular';
+import { IonicPage, NavController,AlertController,ToastController,AlertOptions  } from 'ionic-angular';
 import { Contacts, Contact, ContactField, ContactName } from '@ionic-native/contacts';
 
 
@@ -9,6 +9,7 @@ import { Contacts, Contact, ContactField, ContactName } from '@ionic-native/cont
   templateUrl: 'transfer.html',
 })
 export class TransferPage {
+  private allContacts:any;
 
   constructor(public navCtrl: NavController,
               private contacts: Contacts,
@@ -19,55 +20,46 @@ export class TransferPage {
   ionViewDidLoad() {
     console.log('ionViewDidLoad TransferPage');
   }
-  private loadContact(){
-    console.log("load contacts");
-     this.contacts.find(['displayName','phoneNumbers'], {filter: "", multiple: true}).then(contacts =>{
-      console.log(contacts);
-      this.showToast(JSON.stringify(contacts[0]));
-      
-    });
-    let alert = this.alertCtrl.create({
-      title:"Contacts",
-      message:"Select Receiver Number",
-      inputs : [
+  private loadContact(){ 
+    var options:AlertOptions = {
+      title :  "Contacts",
+      message: 'Select Receipient',
+      buttons: [
         {
-          type: 'radio',
-          label: 'christopher',
-          value:'0707200317'
-        },
-        {
-          type: 'radio',
-          label: 'christopher mulwa',
-          value:'0707200317'
-        },
-        {
-          type: 'radio',
-          label: 'Abu',
-          value:'0707200317'
-        }   
-      ],
-      buttons : [
-        {
-          text:"Cancle",
-          handler: data =>{
-            console.log("cancel clicked");
+          text : 'Cancel',
+          role : 'cancel',
+          handler : ()=> {
+            console.log("cancel");
           }
         },
         {
-          text: "Select",
-          handler: data =>{
+          text : 'Ok',
+          handler: data=>{
+            console.log(data)
             this.showToast(data);
           }
         }
       ]
+    };    
       
+     this.contacts.find(['displayName','phoneNumbers'], {filter: "", multiple: true}).then(contacts =>{
+       this.allContacts = contacts;
+       let alert = this.alertCtrl.create(options);
+        for(let item of contacts){
+          alert.addInput({
+            type: 'radio',
+            label: JSON.stringify(item.displayName),
+            value: JSON.stringify(item.phoneNumbers[0].value)
+          })
+        }
+      alert.present();           
     });
-    alert.present();
+    
   }
   showToast(msg:string){
     let toast = this.toastCtrl.create({
       message : msg,
-      duration : 500000,
+      duration : 5000,
       position : 'bottom'
     });
     toast.present();

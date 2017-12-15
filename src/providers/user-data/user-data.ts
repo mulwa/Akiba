@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { Http,RequestOptions,Headers,Response } from '@angular/http';
 import 'rxjs/add/operator/map';
+import 'rxjs/add/operator/filter';
 
 @Injectable()
 export class UserDataProvider {
@@ -23,6 +24,9 @@ export class UserDataProvider {
   }
   getAccountBalance(token:string){
     return this.http.get(this.BaseUrl+"accountBalance"+"?token="+token).map(res=>res.json());
+  }
+  getFixedAccount(token:string){
+     return this.http.get(this.BaseUrl+"balances"+"?token="+token).map(res => res.json());
   }
 
 }

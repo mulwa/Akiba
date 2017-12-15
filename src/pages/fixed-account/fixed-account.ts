@@ -1,9 +1,11 @@
+import { FixedAccountProvider } from './../../providers/fixed-account/fixed-account';
 import { LoginPage } from './../login/login';
 import { UserDataProvider } from './../../providers/user-data/user-data';
 import { AuthProvider } from './../../providers/auth/auth';
 import { Component } from '@angular/core';
 import { IonicPage, NavController,Nav,LoadingController,AlertController,ToastController  } from 'ionic-angular';
 import {FormGroup,FormBuilder,Validators} from '@angular/forms';
+import 'rxjs/add/operator/filter';
 // import { DatePicker } from '@ionic-native/date-picker';
 
 
@@ -18,6 +20,9 @@ export class FixedAccountPage {
   private accountBalance;
   private fixedAccountForm:FormGroup; 
   private isenabled:boolean=false;
+  private currentAccountAmount:any;
+  private alreadyTransacted:boolean;
+  private transactionMsg:string;
 
   constructor(public navCtrl: NavController,
               private loadingCtrl:LoadingController,
@@ -26,7 +31,8 @@ export class FixedAccountPage {
               private userDataService:UserDataProvider,             
               private form_builder:FormBuilder,
               private nav: Nav,
-              private toastCtrl:ToastController) {
+              private toastCtrl:ToastController,
+              private fixedService: FixedAccountProvider) {
 
       // collect currently logged in user data
       this.user_token = this.authService.getUserToken();
@@ -34,6 +40,8 @@ export class FixedAccountPage {
       console.log(this.user_token+""+this.user);
       // initialize form
       this.initializeform();
+      // check existing  transactions
+      this.alreadyTransacted = false;
             
   }
   
@@ -47,12 +55,17 @@ export class FixedAccountPage {
 
   ionViewDidLoad() {
     if(this.user_token !=null){
-       this.userDataService.getCurrentBalance(this.user_token).subscribe(data =>{       
-        console.log(data);
-      });
+       this.userDataService.getCurrentBalance(this.user_token).subscribe(res => {
+          this.currentAccountAmount = res.find(data => data.account == "fixedAmount");
+          // check if there active transaction
+           this.checkExistingTransaction();         
+       });
+       this.userDataService.getCurrentBalance(this.user_token).subscribe(res => {
+          console.log(res);       
+       });
 
       this.userDataService.getUserData(this.user_token).subscribe((data)=>{
-        console.log(data)
+        // console.log(data);
       }); 
       this.userDataService.getAccountBalance(this.user_token).subscribe((data)=>{
         console.log(data);
@@ -61,11 +74,11 @@ export class FixedAccountPage {
         console.log(this.accountBalance);
       })
     }else{
-      this.showToast("Please Login first");
-     
+      this.showToast("Please Login first");     
     }    
     
   }
+
   initializeform(){
     this.fixedAccountForm = this.form_builder.group({
       amount :['',Validators.required],
@@ -74,19 +87,47 @@ export class FixedAccountPage {
     });
 
   }
-  
+  selectFixedAccount(account){
+    return account.name === 'fixedAmount';
+  }
+   fixedaccount(data) { 
+    return data.account === 'fixedAmount';
+}  
 
-  lockAccount(){      
-    console.log(this.fixedAccountForm.value);
-    console.log(this.validateAmount(this.fixedAccountForm.value.amount));
-    
+  lockAccount(){
+       
     if(this.validateAmount(this.fixedAccountForm.value.amount)){
-      console.log("good to go");
+      let loader = this.loadingCtrl.create({
+        content:"Locking Account please Wait",
+        duration:10000
+      });
+      loader.present().then(()=>{
+        this.fixedService.setFixedAccount(this.fixedAccountForm.value).subscribe(data =>{
+          if(data.status == "success"){
+            this.transactionMsg = data.message;
+          }else{
+            this.transactionMsg = data.message;
+          }
+          console.log(data);
+        },error => {
+          console.log("error has occured"+error);
+          this.transactionMsg = "Please try again later"; 
+          loader.dismissAll();
+          this.showAlert("Transaction Status",this.transactionMsg);         
+          
+        },()=>{
+          loader.dismissAll();
+          this.showAlert("Transaction Status",this.transactionMsg);
+        })
+
+      });
+     
 
     }else{
       this.showToast("You dont have enough money to complete this Transaction, Your current Balance is" + this.accountBalance);
     }
   }
+
   validateAmount(userAmount:number):boolean{
     return userAmount <= Math.round(this.accountBalance);    
     
@@ -126,6 +167,15 @@ export class FixedAccountPage {
       this.isenabled = true;
     }else{
       this.isenabled = false;
+    }
+  }
+  checkExistingTransaction(){
+    if(this.currentAccountAmount.amount !=0 || this.currentAccountAmount == null){
+      this.alreadyTransacted = true;
+      this.showToast("you aleady have fixed transaction");
+    }else{
+      this.alreadyTransacted = false;
+      this.showToast("you can transaction");
     }
   }
 
