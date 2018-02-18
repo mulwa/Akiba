@@ -1,3 +1,4 @@
+import { ChamaInterface } from './../../models/Chama';
 import { ChamaDetailsPage } from './../chama-details/chama-details';
 import { Component } from '@angular/core';
 import { IonicPage, NavController, AlertController, ToastController, LoadingController } from 'ionic-angular';
@@ -16,8 +17,10 @@ export class ChamaPage {
   private mychamas:any[];
   private chama:string; 
   private user_token:string;
-  private accountBalance:any;
+  // private accountBalance:any;
   private user:string;
+   mChama:ChamaInterface;
+
 
   constructor(public navCtrl: NavController,
                private alertCtrl: AlertController,
@@ -65,7 +68,11 @@ export class ChamaPage {
     if(val && val.trim() != ''){
       this.mychamas = this.mychamas.filter((item)=>{
         return (item.name.toLowerCase().indexOf(val.toLowerCase()) > -1);
+      });
+      this.chamaService.searchChama(val).filter(res => val).subscribe(data =>{
+        this.mChama = data;
       })
+
     }        
   }
   addChama(){
@@ -137,8 +144,8 @@ export class ChamaPage {
     console.log("navigating to"+chama.name);
     this.navCtrl.push(ChamaDetailsPage,chama);
   }
-  joinRequest(chama){
-    this.showToast("Chama Request Send to the owner of" + chama.name);
+  joinRequest(chama:ChamaInterface){
+    this.showToast("Chama Request Send to the owner of" + chama.account_name);
   }
 
 }

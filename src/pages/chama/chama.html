@@ -71,8 +71,8 @@
 
   <ion-list *ngSwitchCase="'join_chama'">
     <ion-searchbar (ionInput)="getChama($event)"></ion-searchbar>
-    <ion-item *ngFor="let item of mychamas">
-      <h3>{{item.name}}</h3>
+    <ion-item *ngFor="let item of mChama">
+      <h3>{{item.account_name}}</h3>
       <button ion-button color="secondary" item-end (click)="joinRequest(item)" >Join</button>
     </ion-item>
   </ion-list>

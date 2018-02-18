@@ -24,10 +24,18 @@ export class ChamaProvider {
         
   }
   createChama(account_name){    
-    
-    let body = "account_name=" + account_name + "&token="+ this.user_token;
-    console.log(body);
+    let body = "account_name=" + account_name + "&token="+ this.user_token;    
    return this.http.post(BASEURL+"chama",body,this.options).map(res => res.json());
+  }
+  
+  searchChama(chamaName:string){
+    let body = "chama=" + chamaName;
+    return this.http.post(BASEURL+"chama/search",body,this.options).map(res =>res.json());
+
+  }
+  sendRequest(accountId:number){
+    let body = "acc_id="+ accountId;
+    return this.http.post(BASEURL+"sendRequest",body,this.options).map(res => res.json());
   }
   
 
