@@ -3,6 +3,7 @@ import { Injectable } from '@angular/core';
 import { Storage } from '@ionic/storage';
 import { Http,RequestOptions,Headers,Response } from '@angular/http';
 import 'rxjs/add/operator/map';
+import { BASEURL} from '../../models/BaseUrl';
 
 
 @Injectable()
@@ -10,7 +11,7 @@ export class AuthProvider {
   isLoggedin:boolean;
   authToken:any;  
   currentMail:string; 
-  private url:string ="http://ku-elearning.com/akiba/public/api/login";
+  
 
   constructor(public http: Http, private storage:Storage) {
     this.authToken = null;
@@ -26,7 +27,7 @@ export class AuthProvider {
     headers.append('accept', 'application/json'); 
     let options = new RequestOptions({headers:headers});
 
-    return this.http.post(this.url,body,options)
+    return this.http.post(BASEURL+"login",body,options)
       .map(res =>res.json());
   }
   

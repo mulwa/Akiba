@@ -2,11 +2,11 @@ import { User } from './../../models/User';
 import { Injectable } from '@angular/core';
 import { Http,RequestOptions,Headers,Response } from '@angular/http';
 import 'rxjs/add/operator/map';
+import { BASEURL} from '../../models/BaseUrl';
 
 
 @Injectable()
-export class UserServiceProvider {
-  private BASIC_URL:string = "http://ku-elearning.com/akiba/public/api/register";
+export class UserServiceProvider {  
   private response_message:string;
 
   constructor(public http: Http) {
@@ -20,7 +20,7 @@ export class UserServiceProvider {
     headers.append('content-type','application/x-www-form-urlencoded');
     let options = new RequestOptions({headers:headers});
     return new Promise(resolve =>{
-      this.http.post(this.BASIC_URL,data,options).subscribe((data) =>{
+      this.http.post(BASEURL,data,options).subscribe((data) =>{
         console.log(data.json());
         this.response_message = data.json().status;
         if(data.json().status ==="success"){

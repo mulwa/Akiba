@@ -2,11 +2,11 @@ import { AuthProvider } from './../auth/auth';
 import { Injectable } from '@angular/core';
 import { Http,RequestOptions,Headers,Response } from '@angular/http';
 import 'rxjs/add/operator/map';
+import { BASEURL} from '../../models/BaseUrl';
 
 
 @Injectable()
-export class FixedAccountProvider {
-    private baseUrl:string = "http://ku-elearning.com/akiba/public/api/";
+export class FixedAccountProvider {   
   private headers;
   private options;
   private user_token;
@@ -27,7 +27,7 @@ export class FixedAccountProvider {
     // let data = "amount=" + amount + "&withdraw_date="+ withdrawDate + "&token="+ token;
     let data = JSON.stringify(formdata);
     console.log("from lock service"+data);        
-    return this.http.post(this.baseUrl+"lockCash",data,this.options).map(res => res.json());    
+    return this.http.post(BASEURL+"lockCash",data,this.options).map(res => res.json());    
   }
 
 }

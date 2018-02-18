@@ -53,8 +53,7 @@ export class LoginPage {
       this.authService.authenticate(this.loginForm.value).subscribe(data =>{     
       if(data.status == "success"){
        this.authService.storeUserCredential(data.user.email,data.token);
-       this.loginStatus ="Welcome " + data.user.name+"";
-       
+       this.loginStatus ="Welcome " + data.user.name+"";       
        this.navCtrl.setRoot(AccoutTransactionsPage);
        
 

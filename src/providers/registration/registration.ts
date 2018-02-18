@@ -1,13 +1,14 @@
 import { Injectable } from '@angular/core';
 import { Http,RequestOptions,Headers,Response } from '@angular/http';
 import 'rxjs/add/operator/map';
+import { BASEURL} from '../../models/BaseUrl';
 
 
 @Injectable()
-export class RegistrationProvider {
-  private baseUrl:string = "http://ku-elearning.com/akiba/public/api/register";
+export class RegistrationProvider {  
 
   constructor(public http: Http) {
+    
 
   }
   regiserUser(user){
@@ -19,7 +20,7 @@ export class RegistrationProvider {
     headers.append('accept', 'application/json'); 
     let options = new RequestOptions({headers:headers});
 
-    return this.http.post(this.baseUrl,body,options).map(res => res.json());
+    return this.http.post(BASEURL+"register",body,options).map(res => res.json());
   }
 
 }

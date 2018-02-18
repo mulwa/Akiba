@@ -76,7 +76,7 @@ export class ChamaPage {
       title:'Creat New Chama',
       inputs :[
         {
-          name:'account_name,',
+          name:'account_name',
           placeholder:'Chama Name'
         }
       ],
@@ -95,7 +95,8 @@ export class ChamaPage {
               this.showToast(" Chama Name Can't be Empty Please provide One");             
               return false;
             }
-            this.savaChama(data.account_name,this.user_token);
+            this.savaChama(data.account_name);
+            console.log(data.account_name);
           }
         }
       ]
@@ -110,13 +111,13 @@ export class ChamaPage {
     });
     toast.present();
   }
-  savaChama(name,token){
+  savaChama(name){
     let loader=this.loadingCtrl.create({
       content:"Creating New Chama",
       duration:1000
     });
     loader.present().then(() =>{
-      this.chamaService.createChama(name,token).subscribe(data =>{
+      this.chamaService.createChama(name).subscribe(data =>{
         console.log(data);
         if(data.status == 'success'){
           this.showToast(data.message);

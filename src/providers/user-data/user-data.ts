@@ -2,10 +2,10 @@ import { Injectable } from '@angular/core';
 import { Http,RequestOptions,Headers,Response } from '@angular/http';
 import 'rxjs/add/operator/map';
 import 'rxjs/add/operator/filter';
+import { BASEURL} from '../../models/BaseUrl';
 
 @Injectable()
-export class UserDataProvider {
-  private BaseUrl = "http://ku-elearning.com/akiba/public/api/";
+export class UserDataProvider {  
   private headers;
   private options;
 
@@ -17,16 +17,16 @@ export class UserDataProvider {
     
   }
   getCurrentBalance(token:string){
-    return this.http.get(this.BaseUrl+"balances"+"?token="+token).map(res =>res.json());    
+    return this.http.get(BASEURL+"balances"+"?token="+token).map(res =>res.json());    
   }
   getUserData(token:string){
-    return this.http.get(this.BaseUrl+"user"+"?token="+token).map(res =>res.json());
+    return this.http.get(BASEURL+"user"+"?token="+token).map(res =>res.json());
   }
   getAccountBalance(token:string){
-    return this.http.get(this.BaseUrl+"accountBalance"+"?token="+token).map(res=>res.json());
+    return this.http.get(BASEURL+"accountBalance"+"?token="+token).map(res=>res.json());
   }
   getFixedAccount(token:string){
-     return this.http.get(this.BaseUrl+"balances"+"?token="+token).map(res => res.json());
+     return this.http.get(BASEURL+"balances"+"?token="+token).map(res => res.json());
   }
 
 }
