@@ -1,12 +1,6 @@
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
 
-/**
- * Generated class for the ChamaReportsPage page.
- *
- * See https://ionicframework.com/docs/components/#navigation for more info on
- * Ionic pages and navigation.
- */
 
 @IonicPage()
 @Component({
@@ -14,8 +8,10 @@ import { IonicPage, NavController, NavParams } from 'ionic-angular';
   templateUrl: 'chama-reports.html',
 })
 export class ChamaReportsPage {
+  chamaDetails:any;
 
   constructor(public navCtrl: NavController, public navParams: NavParams) {
+    this.chamaDetails = this.navParams.data;
   }
 
   ionViewDidLoad() {

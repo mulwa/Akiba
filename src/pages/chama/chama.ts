@@ -53,10 +53,10 @@ export class ChamaPage {
   }
   initializeChamas(){
     this.mychamas = [
-      { name:"Open Republic",members:"51"},
-      { name:"Gdg Juja", members:"100"},
-      { name:"Young Proffessionals", members:"30"},
-      { name:"Akiba Bora",members:"20" }
+      { id:1, name:"Open Republic",members:"51"},
+      { id:2, name:"Gdg Juja", members:"100"},
+      { id:3, name:"Young Proffessionals", members:"30"},
+      { id:4, name:"Akiba Bora",members:"20" }
     ]
 
   }

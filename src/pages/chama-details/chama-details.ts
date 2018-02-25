@@ -7,12 +7,12 @@ import { IonicPage, NavController, NavParams } from 'ionic-angular';
   templateUrl: 'chama-details.html',
 })
 export class ChamaDetailsPage {
-  chamaname:string;
+  chama:any;
   chamaTransactions:any;
   
 
   constructor(public navCtrl: NavController, public navParams: NavParams) {
-    this.chamaname = this.navParams.get('name');
+    this.chama = this.navParams.data;  
     this.chamaTransactions = [
       { name:"Request Loan", icon : "loan.png", page: "ChamaLoanRequestPage" },
       { name: "Deposit", icon : "deposit.png", page: "ChamaDepositPage"},
@@ -25,7 +25,7 @@ export class ChamaDetailsPage {
     
   }
   openPage(page:string){    
-    this.navCtrl.push(page);
+    this.navCtrl.push(page,this.chama);
   }
 
 }

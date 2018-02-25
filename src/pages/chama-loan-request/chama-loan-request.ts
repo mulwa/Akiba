@@ -1,12 +1,6 @@
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
 
-/**
- * Generated class for the ChamaLoanRequestPage page.
- *
- * See https://ionicframework.com/docs/components/#navigation for more info on
- * Ionic pages and navigation.
- */
 
 @IonicPage()
 @Component({
@@ -14,8 +8,11 @@ import { IonicPage, NavController, NavParams } from 'ionic-angular';
   templateUrl: 'chama-loan-request.html',
 })
 export class ChamaLoanRequestPage {
+  chamaDetails:any;
 
   constructor(public navCtrl: NavController, public navParams: NavParams) {
+    this.chamaDetails  = this.navParams.data;
+    console.log("loan  reques+ page "+this.chamaDetails);
   }
 
   ionViewDidLoad() {
