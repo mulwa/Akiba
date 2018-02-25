@@ -14,15 +14,18 @@ export class ChamaDetailsPage {
   constructor(public navCtrl: NavController, public navParams: NavParams) {
     this.chamaname = this.navParams.get('name');
     this.chamaTransactions = [
-      { name:"Request Loan", icon : "loan.png"},
-      { name: "Deposit", icon : "deposit.png"},
-      { name: "Members" , icon : "members.png"},
-      { name: "Reports", icon : "reports.png"}
+      { name:"Request Loan", icon : "loan.png", page: "ChamaLoanRequestPage" },
+      { name: "Deposit", icon : "deposit.png", page: "ChamaDepositPage"},
+      { name: "Members" , icon : "members.png", page:"ChamaMembersPage"},
+      { name: "Reports", icon : "reports.png", page: "ChamaReportsPage"}
     ]
   }
 
   ionViewDidLoad() {
-    console.log('ionViewDidLoad ChamaDetailsPage'+this.chamaname);
+    
+  }
+  openPage(page:string){    
+    this.navCtrl.push(page);
   }
 
 }

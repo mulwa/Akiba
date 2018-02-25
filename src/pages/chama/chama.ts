@@ -146,6 +146,9 @@ export class ChamaPage {
   }
   joinRequest(chama:ChamaInterface){
     this.showToast("Chama Request Send to the owner of" + chama.account_name);
+    this.chamaService.sendRequest(chama.id).subscribe(data =>{
+      console.log(data);
+    })
   }
 
 }

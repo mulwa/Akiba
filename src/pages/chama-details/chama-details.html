@@ -3,10 +3,7 @@
   <ion-navbar color="primary">
     <ion-title>{{chamaname}}</ion-title>
   </ion-navbar>
-
 </ion-header>
-
-
 <ion-content>
   <ion-grid>
     <div class="Pagetop">
@@ -29,7 +26,7 @@
   <div>
     <ion-grid>
     <ion-row>
-      <ion-col *ngFor="let trans of chamaTransactions" col-6>
+      <ion-col *ngFor="let trans of chamaTransactions" col-6 (click)="openPage(trans.page)">
         <div id="transArea">
           <div class="transIcon">
             <img style="height: 50px"  src="assets/images/{{trans.icon}}">            

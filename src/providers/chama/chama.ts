@@ -35,8 +35,6 @@ export class ChamaProvider {
   }
   sendRequest(accountId:number){
     let body = "acc_id="+ accountId;
-    return this.http.post(BASEURL+"sendRequest",body,this.options).map(res => res.json());
-  }
-  
-
+    return this.http.post("http://localhost:9090/"+BASEURL+"sendRequest",body,this.options).map(res => res.json());
+  } 
 }
