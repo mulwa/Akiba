@@ -1,6 +1,6 @@
 <ion-header>
   <ion-navbar color="primary">
-    <ion-title> {{chamaDetails.name}}  Deposit</ion-title>
+    <ion-title>Deposit</ion-title>
   </ion-navbar>
 
 </ion-header>
@@ -23,5 +23,21 @@
     </ion-row>
   </div>
   </ion-grid>
+
+  <ion-list padding>
+    <div id="formArea">
+      <form [formGroup]="depositForm" (ngSubmit)="chamaDeposit()">
+      <ion-item>
+      <ion-label floating>Deposit Amount</ion-label>
+      <ion-input formControlName="amount" type="number"></ion-input>
+     </ion-item>
+    <ion-item>
+      <button id="btnMedium" type="submit" block ion-button color="secondary" [disabled]="!depositForm.valid">Deposit</button>
+    </ion-item>
+
+      </form>
+    </div>
+    
+  </ion-list>
 
 </ion-content>

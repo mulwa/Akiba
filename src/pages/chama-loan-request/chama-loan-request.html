@@ -1,6 +1,6 @@
 <ion-header>
   <ion-navbar color="primary">
-    <ion-title>  {{chamaDetails.name}} Loan Request</ion-title>
+    <ion-title>Loan Request</ion-title>
   </ion-navbar>
 </ion-header>
 
@@ -24,5 +24,18 @@
     </ion-row>
   </div>
   </ion-grid>
+  <ion-list padding>
+    <div id="formArea">
+      <form [formGroup]="loanForm" (ngSubmit)="requestLoan()">
+        <ion-item>
+          <ion-label floating>Request Amount</ion-label>
+          <ion-input type="number" formControlName="amount"></ion-input>
+        </ion-item>
+        <ion-item>
+          <button ion-button block type="submit" color="secondary" id="btnMedium" [disabled]="!loanForm.valid">Request Loan</button>
+        </ion-item>
+      </form>
+    </div>
+  </ion-list>
 
 </ion-content>

@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
+import {FormGroup,FormBuilder,Validators} from '@angular/forms';
 
 
 @IonicPage()
@@ -9,14 +10,27 @@ import { IonicPage, NavController, NavParams } from 'ionic-angular';
 })
 export class ChamaLoanRequestPage {
   chamaDetails:any;
+  loanForm:FormGroup;
 
-  constructor(public navCtrl: NavController, public navParams: NavParams) {
+  constructor(public navCtrl: NavController, 
+              public navParams: NavParams,
+              private form_builder:FormBuilder) {
     this.chamaDetails  = this.navParams.data;
-    console.log("loan  reques+ page "+this.chamaDetails);
+    
+    this.initializeForm();
+    
   }
 
   ionViewDidLoad() {
     console.log('ionViewDidLoad ChamaLoanRequestPage');
+  }
+  initializeForm(){
+    this.loanForm =  this.form_builder.group({
+      amount:['',Validators.required]
+    })
+  }
+  requestLoan(){
+    console.log("requesting loan  form"+this.chamaDetails.name);
   }
 
 }
