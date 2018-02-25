@@ -140,8 +140,7 @@ export class ChamaPage {
     });
     
   }
-  showMore(chama){
-    console.log("navigating to"+chama.name);
+  showMore(chama){    
     this.navCtrl.push(ChamaDetailsPage,chama);
   }
   joinRequest(chama:ChamaInterface){
