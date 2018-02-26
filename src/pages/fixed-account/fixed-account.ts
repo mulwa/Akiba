@@ -76,7 +76,7 @@ export class FixedAccountPage {
         console.log(this.accountBalance);
       })
     }else{
-      this.showToast("Please Login first");     
+      this.userDataService.showToast("Please Login first");     
     }    
     
   }
@@ -126,7 +126,7 @@ export class FixedAccountPage {
      
 
     }else{
-      this.showToast("You dont have enough money to complete this Transaction, Your current Balance is " + this.accountBalance);
+      this.userDataService.showToast("You dont have enough money to complete this Transaction, Your current Balance is " + this.accountBalance);
     }
   }
 
@@ -155,14 +155,7 @@ export class FixedAccountPage {
     alert.present();
     
   }
-  showToast(msg:string){
-    let toast = this.toastCtrl.create({
-      message:  msg,
-      duration: 5000,
-      position: 'bottom'
-    });
-    toast.present();
-  }
+  
   // disable button to wait current balance to load
   ActualBalaceLoaded(){    
     if(this.accountBalance !==null){
@@ -174,10 +167,10 @@ export class FixedAccountPage {
   checkExistingTransaction(){
     if(this.currentAccountAmount.amount !=0 || this.currentAccountAmount == null){
       this.alreadyTransacted = true;
-      this.showToast("you aleady have fixed transaction");
+      this.userDataService.showToast("you aleady have fixed transaction");
     }else{
       this.alreadyTransacted = false;
-      this.showToast("you can transaction");
+      this.userDataService.showToast("you can transaction");
     }
   }
 

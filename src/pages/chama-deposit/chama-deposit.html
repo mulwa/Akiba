@@ -1,10 +1,15 @@
 <ion-header>
   <ion-navbar color="primary">
     <ion-title>Deposit</ion-title>
+    <ion-buttons end *ngIf="accountBalance != null">
+      <button ion-button icon-only>
+          <ion-badge color="secondary">{{accountBalance}}</ion-badge>
+      </button>
+    </ion-buttons> 
   </ion-navbar>
 
 </ion-header>
-<ion-content>
+<ion-content class="whitebg">
   <ion-grid>
     <div class="Pagetop">
     <ion-row>

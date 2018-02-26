@@ -40,7 +40,7 @@ export class FixedAmountPage {
       })
 
     }else{      
-      this.showToast("Please Login first");
+      this.userDataService.showToast("Please Login first");
       this.navCtrl.setRoot(LoginPage);
     }
     
@@ -57,18 +57,11 @@ export class FixedAmountPage {
     if(this.userDataService.validateAmount(this.fixedForm.value.amount,this.accountBalance)){
 
     }else{
-      this.showToast("You dont have enough money to complete this Transaction, Current balance is "      +  this.accountBalance);
+      this.userDataService.showToast("You dont have enough money to complete this Transaction, Current balance is "+this.accountBalance);
     }
     console.log(this.fixedForm.value);
   }
-  showToast(msg:string){
-    let toast = this.toastCtrl.create({
-      message : msg,
-      duration : 5000,
-      position : 'bottom'
-    });
-    toast.present();
-  }
+  
  
 
 }

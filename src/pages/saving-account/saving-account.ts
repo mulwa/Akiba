@@ -44,7 +44,7 @@ export class SavingAccountPage {
       });
 
     }else{
-      this.showToast("Please Login First");
+      this.userDataProvider.showToast("Please Login First");
       this.navCtrl.setRoot(LoginPage);
     }
   }
@@ -63,17 +63,10 @@ export class SavingAccountPage {
     if(this.userDataProvider.validateAmount(this.savingForm.value.amount,this.accountBalance)){
       
     }else{
-      this.showToast("You dont have enough money to complete this Transaction, Current balance is"+   this.accountBalance);
+      this.userDataProvider.showToast("You dont have enough money to complete this Transaction, Current balance is "+this.accountBalance);
     }
     
   }
-  showToast(msg:string){
-    let toast = this.toastCtrl.create({
-      message : msg,
-      duration : 5000,
-      position : 'bottom'
-    });
-    toast.present();
-  }  
+   
 
 }

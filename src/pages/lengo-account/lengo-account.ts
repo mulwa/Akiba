@@ -48,7 +48,7 @@ ionViewCanEnter():boolean {
       })
     }else{
       this.navCtrl.setRoot(LoginPage);
-      this.showToast("Please Login First");
+      this.userDataProvider.showToast("Please Login First");
     }
     
   }
@@ -63,21 +63,12 @@ ionViewCanEnter():boolean {
   }
   setLengo(){
     console.log(this.lengoForm.value);
-    if(this.validateAmount(this.lengoForm.value.amount)){
+    if(this.userDataProvider.validateAmount(this.lengoForm.value.amount,this.accountBalance)){
       
     }else{
-      this.showToast("You dont have enough money to complete this Transaction, Current balance is"+this.accountBalance);
+      this.userDataProvider.showToast("You dont have enough money to complete this Transaction, Current balance is "+this.accountBalance);
     }
   }
-  showToast(msg:string){
-    let toast = this.toastCtlr.create({
-      message : msg,
-      duration : 5000,
-      position : 'bottom'
-    });
-    toast.present();
-  }
-  validateAmount(userAmount):boolean{
-     return userAmount <= Math.round(this.accountBalance); 
-  }
+  
+  
 }
