@@ -35,6 +35,7 @@ export class ChamaMembersPage {
       buttons: [
          {
           text: "Call",
+          icon: "call",
           role:"destructive",
           handler: () =>{
             console.log("call member");
@@ -43,6 +44,7 @@ export class ChamaMembersPage {
         {
           text:"Make administrator",
           role: "destructive",
+          icon: "person",
           handler:()=>{
             console.log("make adminstrator");
           }
@@ -50,6 +52,7 @@ export class ChamaMembersPage {
         {
           text: "Remove Member",
           role:"destructive",
+          icon: "trash",
           handler:()=>{
             console.log("Remove member")
           }
@@ -57,6 +60,7 @@ export class ChamaMembersPage {
         {
           text: "Cancel",
           role: "cancel",
+          icon: "close",
           handler: ()=>{
             console.log("Cancel cliked");
           }
