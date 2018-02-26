@@ -99,7 +99,7 @@ export class ChamaPage {
           text: 'Save',
           handler: data =>{
             if(data.account_name ==''){ 
-              this.showToast(" Chama Name Can't be Empty Please provide One");             
+              this.userDataService.showToast(" Chama Name Can't be Empty Please provide One");             
               return false;
             }
             this.savaChama(data.account_name);
@@ -110,14 +110,7 @@ export class ChamaPage {
     });
     alert.present();
   }
-  showToast(msg:string){
-    let toast = this.toastCtrl.create({
-      message : msg,
-      duration : 5000,
-      position : 'bottom'
-    });
-    toast.present();
-  }
+  
   savaChama(name){
     let loader=this.loadingCtrl.create({
       content:"Creating New Chama",
@@ -127,11 +120,11 @@ export class ChamaPage {
       this.chamaService.createChama(name).subscribe(data =>{
         console.log(data);
         if(data.status == 'success'){
-          this.showToast(data.message);
+          this.userDataService.showToast(data.message);
         }
       },error =>{
         console.log("error occured"+error);
-        this.showToast("please Try again Later");
+        this.userDataService.showToast("please Try again Later");
       },()=>{
         console.log("complete called");
         loader.dismissAll();
@@ -144,7 +137,7 @@ export class ChamaPage {
     this.navCtrl.push(ChamaDetailsPage,chama);
   }
   joinRequest(chama:ChamaInterface){
-    this.showToast("Chama Request Send to the owner of" + chama.account_name);
+    this.userDataService.showToast("Chama Request Send to the owner of "+chama.account_name);
     this.chamaService.sendRequest(chama.id).subscribe(data =>{
       console.log(data);
     })
