@@ -27,7 +27,7 @@ export class ChamaDepositPage {
     })
   }
   chamaDeposit(){
-    console.log("depositing  amount");
+    console.log("depositing  amount"+this.depositForm.value.amount);
   }
 
 }

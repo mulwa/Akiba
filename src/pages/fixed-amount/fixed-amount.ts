@@ -54,10 +54,10 @@ export class FixedAmountPage {
     });
   }
   save(){
-    if(this.validateAmount(this.fixedForm.value.amount)){
+    if(this.userDataService.validateAmount(this.fixedForm.value.amount,this.accountBalance)){
 
     }else{
-      this.showToast("You dont have enough money to complete this Transaction, Current balance is"+this.accountBalance);
+      this.showToast("You dont have enough money to complete this Transaction, Current balance is "      +  this.accountBalance);
     }
     console.log(this.fixedForm.value);
   }
@@ -69,8 +69,6 @@ export class FixedAmountPage {
     });
     toast.present();
   }
-  validateAmount(userAmount):boolean{
-     return userAmount <= Math.round(this.accountBalance); 
-  }
+ 
 
 }

@@ -71,6 +71,8 @@ export class FixedAccountPage {
         console.log(data);
         
         this.accountBalance = data.account_amount;
+        // for testing service
+        // this.accountBalance = 6000;
         console.log(this.accountBalance);
       })
     }else{
@@ -124,7 +126,7 @@ export class FixedAccountPage {
      
 
     }else{
-      this.showToast("You dont have enough money to complete this Transaction, Your current Balance is" + this.accountBalance);
+      this.showToast("You dont have enough money to complete this Transaction, Your current Balance is " + this.accountBalance);
     }
   }
 

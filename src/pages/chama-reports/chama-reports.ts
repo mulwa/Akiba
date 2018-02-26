@@ -14,8 +14,7 @@ export class ChamaReportsPage {
     this.chamaDetails = this.navParams.data;
   }
 
-  ionViewDidLoad() {
-    console.log('ionViewDidLoad ChamaReportsPage');
+  ionViewDidLoad() {  
   }
 
 }

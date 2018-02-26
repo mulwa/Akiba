@@ -60,10 +60,10 @@ export class SavingAccountPage {
   }
   save(){
     console.log(this.savingForm.value);
-    if(this.validateAmount(this.savingForm.value.amount)){
+    if(this.userDataProvider.validateAmount(this.savingForm.value.amount,this.accountBalance)){
       
     }else{
-      this.showToast("You dont have enough money to complete this Transaction, Current balance is"+this.accountBalance);
+      this.showToast("You dont have enough money to complete this Transaction, Current balance is"+   this.accountBalance);
     }
     
   }
@@ -74,9 +74,6 @@ export class SavingAccountPage {
       position : 'bottom'
     });
     toast.present();
-  }
-  validateAmount(userAmount):boolean{
-     return userAmount <= Math.round(this.accountBalance); 
-  }
+  }  
 
 }

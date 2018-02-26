@@ -52,7 +52,7 @@
           <ion-input type="date" formControlName="untilDate"></ion-input>
         </ion-item>
         <ion-item>
-          <button id="btnMedium" block ion-button color="secondary" >Save</button>
+          <button id="btnMedium" block ion-button color="secondary" [disabled]="!fixedForm.valid" >Save</button>
         </ion-item>
       </form>
     </div>

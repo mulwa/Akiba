@@ -28,5 +28,9 @@ export class UserDataProvider {
   getFixedAccount(token:string){
      return this.http.get(BASEURL+"balances"+"?token="+token).map(res => res.json());
   }
+  validateAmount(userAmount:number,currentBalance:number):boolean{
+    return userAmount <= Math.round(currentBalance);    
+    
+  }
 
 }
