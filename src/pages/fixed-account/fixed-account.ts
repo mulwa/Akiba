@@ -83,9 +83,8 @@ export class FixedAccountPage {
 
   initializeform(){
     this.fixedAccountForm = this.form_builder.group({
-      amount :['',Validators.required],
-      withdraw_date :['',Validators.required],
-      token :[this.user_token] 
+      amount:['',Validators.required],
+      withdraw_date:['',Validators.required]      
     });
 
   }

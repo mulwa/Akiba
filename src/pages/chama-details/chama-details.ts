@@ -1,3 +1,4 @@
+import { ChamaInterface } from './../../models/Chama';
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
 
@@ -7,7 +8,7 @@ import { IonicPage, NavController, NavParams } from 'ionic-angular';
   templateUrl: 'chama-details.html',
 })
 export class ChamaDetailsPage {
-  chama:any;
+  chama:ChamaInterface;
   chamaTransactions:any;
   
 
