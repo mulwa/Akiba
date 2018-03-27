@@ -1,3 +1,4 @@
+import { ChamaInterface } from './../../models/Chama';
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
 import {FormGroup,FormBuilder,Validators} from '@angular/forms';
@@ -9,8 +10,8 @@ import {FormGroup,FormBuilder,Validators} from '@angular/forms';
   templateUrl: 'chama-loan-request.html',
 })
 export class ChamaLoanRequestPage {
-  chamaDetails:any;
-  loanForm:FormGroup;
+  chamaDetails:ChamaInterface;
+  loanForm:FormGroup;  
 
   constructor(public navCtrl: NavController, 
               public navParams: NavParams,
@@ -30,7 +31,7 @@ export class ChamaLoanRequestPage {
     })
   }
   requestLoan(){
-    console.log("requesting loan  form"+this.chamaDetails.name);
+    console.log("requesting loan  form"+this.chamaDetails.account_name);
   }
 
 }

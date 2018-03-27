@@ -1,8 +1,9 @@
+import { SavingsProvider } from './../../providers/savings/savings';
 import { LoginPage } from './../login/login';
 import { UserDataProvider } from './../../providers/user-data/user-data';
 import { AuthProvider } from './../../providers/auth/auth';
 import { Component } from '@angular/core';
-import { IonicPage, NavController,ToastController} from 'ionic-angular';
+import { IonicPage, NavController, ToastController, LoadingController } from 'ionic-angular';
 // import { DatePicker } from '@ionic-native/date-picker';
 import { FormGroup, FormBuilder,Validators } from '@angular/forms'
 
@@ -22,6 +23,8 @@ export class SavingAccountPage {
               private auth:AuthProvider,
               private userDataProvider: UserDataProvider,
               private toastCtrl:ToastController,
+              private savings_provider: SavingsProvider,
+              private loadingCtrl: LoadingController,
               private formBuilder:FormBuilder) {
   // get current user
   this.user_token = this.auth.getUserToken();
@@ -61,6 +64,29 @@ export class SavingAccountPage {
   save(){
     console.log(this.savingForm.value);
     if(this.userDataProvider.validateAmount(this.savingForm.value.amount,this.accountBalance)){
+
+      let loader = this.loadingCtrl.create({
+        content:'Please Wait Saving Cash',
+        duration:1000
+      });
+      loader.present().then(() =>{
+        this.savings_provider.makeSavings(this.savingForm.value).subscribe(res =>{
+          if(res.status === "success"){
+            this.userDataProvider.showToast("Successfully  Saved To your Account");
+          }else{
+            this.userDataProvider.showToast("Please Try  Again  Later");
+          }
+
+        }, err =>{
+          this.userDataProvider.showToast(`An error  has occurred:${err}`);
+          console.log(`an error has occured : ${err}`);
+        })
+
+      }).catch(e =>{
+        console.log(`An error Has Occurred ${e}`);
+      })
+
+
       
     }else{
       this.userDataProvider.showToast("You dont have enough money to complete this Transaction, Current balance is "+this.accountBalance);

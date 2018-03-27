@@ -1,8 +1,9 @@
+import { BASEURL } from './../../models/BaseUrl';
 import { AuthProvider } from './../auth/auth';
 import { Injectable } from '@angular/core';
 import { Http, RequestOptions,Headers,Response } from '@angular/http';
 import 'rxjs/add/operator/map';
-import { BASEURL} from '../../models/BaseUrl';
+
 
 
 @Injectable()
@@ -41,5 +42,15 @@ export class ChamaProvider {
     let search_params = new URLSearchParams();
     search_params.append("token",this.user_token);    
     return this.http.get(BASEURL+"chama/admin",new RequestOptions({headers:this.headers,search:search_params})).map(res =>res.json());
+  }
+  getChamaMembers(id:number){
+    return this.http.get(BASEURL+"chama/"+id+"/users",this.options).map(res => res.json());
+  }
+
+  depositToChama(amount:number,accountId:number){
+    let body = "amount="+ amount;
+    return this.http.post(BASEURL+"chama/"+accountId+"/deposit",body,this.options).map(res => res.json());
+
+
   } 
 }
