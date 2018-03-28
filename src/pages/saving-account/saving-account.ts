@@ -1,4 +1,4 @@
-import { SavingsProvider } from './../../providers/savings/savings';
+import { ChamaProvider } from './../../providers/chama/chama';
 import { LoginPage } from './../login/login';
 import { UserDataProvider } from './../../providers/user-data/user-data';
 import { AuthProvider } from './../../providers/auth/auth';
@@ -23,10 +23,10 @@ export class SavingAccountPage {
               private auth:AuthProvider,
               private userDataProvider: UserDataProvider,
               private toastCtrl:ToastController,
-              private savings_provider: SavingsProvider,
+              private chama_provider: ChamaProvider,              
               private loadingCtrl: LoadingController,
               private formBuilder:FormBuilder) {
-  // get current user
+  // get current user  
   this.user_token = this.auth.getUserToken();
   // initializeform
   this.initializeform();
@@ -61,8 +61,7 @@ export class SavingAccountPage {
 
     });
   }
-  save(){
-    console.log(this.savingForm.value);
+  save(){    
     if(this.userDataProvider.validateAmount(this.savingForm.value.amount,this.accountBalance)){
 
       let loader = this.loadingCtrl.create({
@@ -70,7 +69,7 @@ export class SavingAccountPage {
         duration:1000
       });
       loader.present().then(() =>{
-        this.savings_provider.makeSavings(this.savingForm.value).subscribe(res =>{
+        this.chama_provider.makeSavings(this.savingForm.value).subscribe(res =>{
           if(res.status === "success"){
             this.userDataProvider.showToast("Successfully  Saved To your Account");
           }else{

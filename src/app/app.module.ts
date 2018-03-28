@@ -29,8 +29,6 @@ import { RegistrationProvider } from '../providers/registration/registration';
 import { FixedAccountProvider } from '../providers/fixed-account/fixed-account';
 import { ChamaProvider } from '../providers/chama/chama';
 import { Contacts} from '@ionic-native/contacts';
-import { SavingsProvider } from '../providers/savings/savings';
-
 
 
 
@@ -85,8 +83,7 @@ import { SavingsProvider } from '../providers/savings/savings';
     UserDataProvider,
     RegistrationProvider,
     FixedAccountProvider,
-    ChamaProvider,
-    SavingsProvider,
+    ChamaProvider,    
     
   ]
 })

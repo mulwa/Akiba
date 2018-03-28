@@ -50,7 +50,18 @@ export class ChamaProvider {
   depositToChama(amount:number,accountId:number){
     let body = "amount="+ amount;
     return this.http.post(BASEURL+"chama/"+accountId+"/deposit",body,this.options).map(res => res.json());
+  } 
 
+  
+  longoSavings(lengoData){
+    let body = "target=" + lengoData.target + "&contr_amount=" + lengoData.contr_amount + "&deductioperiod=" +lengoData.deductioperiod;
 
+    console.log(body);
+    return this.http.post(BASEURL+"lengo",body,this.options).map(res => res.json());
+  }
+   makeSavings(saveData){
+    let body = "amount=" + saveData.amount + "&percentage=" + saveData.percentage + "&duration=" + saveData.duration + "&wdate="+ saveData.wdate + "&token="+ saveData.token;   
+    console.log(body);
+    return this.http.post(BASEURL+"save",body,this.options).map(res => res.json());
   } 
 }

@@ -1,8 +1,9 @@
+import { ChamaProvider } from './../../providers/chama/chama';
 import { LoginPage } from './../login/login';
 import { AuthProvider } from './../../providers/auth/auth';
 import { UserDataProvider } from './../../providers/user-data/user-data';
 import { Component } from '@angular/core';
-import { IonicPage, NavController,ToastController } from 'ionic-angular';
+import { IonicPage, NavController, ToastController, LoadingController } from 'ionic-angular';
 import { FormGroup, FormBuilder,Validators} from '@angular/forms';
 
 
@@ -20,6 +21,8 @@ export class LengoAccountPage {
               private formBuilder:FormBuilder,
               private userDataProvider: UserDataProvider,
               private auth:AuthProvider,
+              private chama_provider: ChamaProvider,
+              private loadingCtrl:LoadingController,              
               private toastCtlr:ToastController) {
 
   this.user_token = this.auth.getUserToken();
@@ -56,14 +59,37 @@ ionViewCanEnter():boolean {
     this.lengoForm = this.formBuilder.group({
       target:['',Validators.required],
       contr_amount:['',Validators.required],
-      deductioperiod:['',Validators.required],
-      token:[this.user_token]
+      deductioperiod:['',Validators.required],      
 
     });
   }
   setLengo(){
     console.log(this.lengoForm.value);
-    if(this.userDataProvider.validateAmount(this.lengoForm.value.amount,this.accountBalance)){
+    console.log('entered amount '+this.lengoForm.value.contr_amount);
+    console.log('actual balance '+this.accountBalance);
+    if(this.userDataProvider.validateAmount(this.lengoForm.value.contr_amount,this.accountBalance)){
+      let loader = this.loadingCtrl.create({
+        content:"Setting Your Lengo Amount",
+        duration:1000
+      });
+      loader.present().then(()=>{
+        this.chama_provider.longoSavings(this.lengoForm.value).subscribe((res)=>{
+          if(res.status ==="success"){
+            this.userDataProvider.showToast("Transaction was Successfull");
+          }else{
+            this.userDataProvider.showToast("Transaction failed:  Try again later");
+          }
+
+        },error =>{
+          console.log(`An error has occurred please Try again later ${error}`);
+          this.userDataProvider.showToast(`An error has occurred please Try again later ${error}`);
+        
+        })
+
+      }).catch(error=>{
+        console.log(`An error has Occured: ${error}`);
+        this.userDataProvider.showToast(`An error has occured ${error}`)
+      })
       
     }else{
       this.userDataProvider.showToast("You dont have enough money to complete this Transaction, Current balance is "+this.accountBalance);
