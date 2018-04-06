@@ -34,10 +34,7 @@
   <ion-segment [(ngModel)]="chama">
     <ion-segment-button value="myaccounts" style="text-transform: none">
       My Chamas <ion-badge item-end>5</ion-badge>
-    </ion-segment-button>
-    <ion-segment-button value="requests" style="text-transform: none">
-      Requests <ion-badge item-end>0</ion-badge>
-    </ion-segment-button>
+    </ion-segment-button>    
     <ion-segment-button value="join_chama" style="text-transform: none">
       Join chama
     </ion-segment-button>
@@ -60,14 +57,7 @@
         <button ion-fab fab-min color="secondary" (click)="addChama()" icon-only><ion-icon name="add"></ion-icon></button>
       </ion-fab>
     </div>
-  </ion-list>
-  
-  <!--start request ion-segment-->
-  <ion-list *ngSwitchCase="'requests'">
-    <ion-item>
-      <ion-buttons>you dont have Any chama request</ion-buttons>      
-    </ion-item>    
-  </ion-list>
+  </ion-list>  
 
   <ion-list *ngSwitchCase="'join_chama'">
     <ion-searchbar (ionInput)="getChama($event)"></ion-searchbar>

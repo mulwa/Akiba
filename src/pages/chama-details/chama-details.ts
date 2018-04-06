@@ -18,7 +18,8 @@ export class ChamaDetailsPage {
       { name:"Request Loan", icon : "loan.png", page: "ChamaLoanRequestPage" },
       { name: "Deposit", icon : "deposit.png", page: "ChamaDepositPage"},
       { name: "Members" , icon : "members.png", page:"ChamaMembersPage"},
-      { name: "Reports", icon : "reports.png", page: "ChamaReportsPage"}
+      { name: "Reports", icon : "reports.png", page: "ChamaReportsPage"},
+      { name: "Membership Request", icon : "members.png", page: "MembershipRequestPage"}
     ]
   }
 

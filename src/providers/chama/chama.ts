@@ -34,10 +34,9 @@ export class ChamaProvider {
     return this.http.post(BASEURL+"chama/search",body,this.options).map(res =>res.json());
 
   }
-  sendRequest(accountId:number){
-    let body = "acc_id="+ accountId;
-    return this.http.post("http://localhost:9090/"+BASEURL+"sendRequest",body,this.options).map(res => res.json());
-  }
+  sendRequest(accountId:number){    
+    return this.http.get(BASEURL+"sendRequest/"+accountId,this.options).map(res => res.json());
+  }  
   getAllchamas(){
     let search_params = new URLSearchParams();
     search_params.append("token",this.user_token);    

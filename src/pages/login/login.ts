@@ -16,9 +16,7 @@ import { Network } from '@ionic-native/network';
 })
 export class LoginPage {
   private loginForm:FormGroup;
-  private loginStatus:string;
-  private loading:any;
-  
+  private loginStatus:string;  
 
   constructor(public navCtrl: NavController, 
               public navParams: NavParams,
@@ -45,12 +43,12 @@ export class LoginPage {
     });    
   }
   login(){ 
-    this.loading = this.loadingCtrl.create({
-      content: "Checking Credentials",
-      duration:10000
+    let loader = this.loadingCtrl.create({
+      content: "Checking Credentials"      
     });
-    this.loading.present().then(()=>{
-      this.authService.authenticate(this.loginForm.value).subscribe(data =>{     
+    loader.present().then(()=>{
+      this.authService.authenticate(this.loginForm.value).subscribe(data =>{
+
       if(data.status == "success"){
        this.authService.storeUserCredential(data.user.email,data.token);
        this.loginStatus ="Welcome " + data.user.name+"";       
@@ -66,9 +64,8 @@ export class LoginPage {
       console.log(error);
       this.loginStatus = "Please Try again Later";
        
-    },()=>{
-      console.log("login completed"); 
-      this.loading.dismissAll();
+    },()=>{      
+      loader.dismiss();
       this.showAlert("Login  Status",this.loginStatus);  
     });   
   });      

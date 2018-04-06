@@ -50,7 +50,7 @@ export class ChamaPage {
       });
     }   
     
-  }
+  }   
  
   getChama(event:any){
     // reset all chamas
@@ -63,6 +63,7 @@ export class ChamaPage {
       });
       this.chamaService.searchChama(val).filter(res => val).subscribe(data =>{
         this.mChama = data;
+        
       })
 
     }        
@@ -105,57 +106,65 @@ export class ChamaPage {
   
   savaChama(name){
     let loader=this.loadingCtrl.create({
-      content:"Creating New Chama",
-      duration:1000
+      content:"Creating New Chama",      
     });
-    loader.present().then(() =>{
+    loader.present();
       this.chamaService.createChama(name).subscribe(data =>{
-        console.log(data);
+        loader.dismiss();
         if(data.status == 'success'){
           this.userDataService.showToast(data.message);
+        }else{
+          this.userDataService.showToast(`Try again later Please`);
         }
       },error =>{
+        loader.dismiss();
         console.log("error occured"+error);
         this.userDataService.showToast("please Try again Later");
-      },()=>{
-        console.log("complete called");
-        loader.dismissAll();
-      })
-
-    });
+      });
+   
     
   }
   showMore(chama:ChamaInterface){    
     this.navCtrl.push(ChamaDetailsPage,chama);
   }
+
   joinRequest(chama:ChamaInterface){
-    this.userDataService.showToast("Chama Request Send to the owner of "+chama.account_name);
+    let loader = this.loadingCtrl.create({
+      content:"sending join request",
+    });
+    loader.present();    
     this.chamaService.sendRequest(chama.id).subscribe(data =>{
-      console.log(data);
+      loader.dismiss();
+      if(data.status ==="success"){
+        this.userDataService.showToast("Chama Request Send to the owner of "+chama.account_name);
+      }else{
+        this.userDataService.showToast("Please Try Again Later");
+      }
+    },error =>{
+      loader.dismiss();
+      this.userDataService.showToast(`Please Try Again Later : ${error}`);      
     })
   }
 
   get_my_chama(){
     console.log("executing get my chama");
     let loader = this.loadingCtrl.create({
-      content: "Fetching Your Chama",
-      duration:1000
+      content: "Fetching Your Chama",     
     });
-    loader.present()
-    .then(() =>{
-      this.chamaService.getAllchamas().subscribe((data) =>{
+    loader.present();    
+      this.chamaService.getAllchamas().subscribe((data) =>{ 
+        loader.dismiss();       
       if(data.data.length === 0){
         this.userDataService.showToast("You Dont Have Any Active Chama");
         return;       
       }
        this.mychamas = data.data;
       
+    }, error =>{
+      this.userDataService.showToast(`Please try againa later ${error}`);
     });
-    })
-    .catch(error => {
-      console.log(`an error Has occured: ${error}`);
-      this.userDataService.showToast("Please Try Again Later");
-    });
+    
+    
     
   }
 
