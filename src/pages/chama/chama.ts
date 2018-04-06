@@ -29,8 +29,7 @@ export class ChamaPage {
                private authService: AuthProvider,
                private userDataService: UserDataProvider,
                private loadingCtrl : LoadingController) {
-    this.chama = "myaccounts"; 
-    this.get_my_chama(); 
+    this.chama = "myaccounts";     
     this.user_token = this.authService.getUserToken();
     this.user = this.authService.getCurrentEmail();
     console.log(this.user_token);
@@ -44,6 +43,7 @@ export class ChamaPage {
   } 
 
   ionViewDidLoad() {
+    this.get_my_chama(); 
     if(this.user_token !== null){
       this.userDataService.getCurrentBalance(this.user_token).subscribe(data =>{       
         console.log(data);
