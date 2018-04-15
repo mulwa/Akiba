@@ -33,6 +33,7 @@ export class ChamaPage {
     this.user_token = this.authService.getUserToken();
     this.user = this.authService.getCurrentEmail();
     console.log(this.user_token);
+    
   }
   ionViewCanEnter():boolean {
     if(this.authService.getUserToken() ==null){
@@ -42,8 +43,8 @@ export class ChamaPage {
     }    
   } 
 
-  ionViewDidLoad() {
-    this.get_my_chama(); 
+  ionViewDidLoad() { 
+    this.get_my_chama();    
     if(this.user_token !== null){
       this.userDataService.getCurrentBalance(this.user_token).subscribe(data =>{       
         console.log(data);
@@ -131,6 +132,7 @@ export class ChamaPage {
   joinRequest(chama:ChamaInterface){
     let loader = this.loadingCtrl.create({
       content:"sending join request",
+      
     });
     loader.present();    
     this.chamaService.sendRequest(chama.id).subscribe(data =>{
@@ -149,11 +151,13 @@ export class ChamaPage {
   get_my_chama(){
     console.log("executing get my chama");
     let loader = this.loadingCtrl.create({
-      content: "Fetching Your Chama",     
+      content: "Fetching Your Chama",
+          
     });
     loader.present();    
       this.chamaService.getAllchamas().subscribe((data) =>{ 
-        loader.dismiss();       
+        loader.dismiss();
+        console.log(data);      
       if(data.data.length === 0){
         this.userDataService.showToast("You Dont Have Any Active Chama");
         return;       

@@ -63,4 +63,8 @@ export class ChamaProvider {
     console.log(body);
     return this.http.post(BASEURL+"save",body,this.options).map(res => res.json());
   } 
+
+  getTransactions(accountId:number){
+    return this.http.get(BASEURL+"account/"+accountId+"/transactions").map(res =>res.json());
+  }
 }

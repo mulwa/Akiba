@@ -72,10 +72,11 @@ export class ChamaMembersPage {
   get_all_members(){    
     let loader = this.loadingCtrl.create({
       content:'Fetching Chama Members',
-      duration:1000
+      dismissOnPageChange:true,      
     });
   loader.present().then(()=>{
-    this.chama_provider.getChamaMembers(this.chamaDetails.id).subscribe((members) =>{      
+    this.chama_provider.getChamaMembers(this.chamaDetails.id).subscribe((members) =>{  
+      loader.dismiss()    
       console.log(members);
       if(members.length ===0){
         this.userDataProvider.showToast("This Chama Has No Active Members");
@@ -83,7 +84,9 @@ export class ChamaMembersPage {
       }
       this.chamaMembers = members;
     },error =>{
+      loader.dismiss()
       console.log(`An error Has occured: ${error}`);
+      this.userDataProvider.showToast(`Try again Later An error Has occured: ${error}`)
     });
 
 
