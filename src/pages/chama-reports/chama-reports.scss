@@ -1,13 +1,15 @@
+$color-primary : #795548;
+$color-secondary: #e38d25;
 page-chama-reports {
     .imageAvator{
         width: 30px;
         height: 30px;
-        background-color: #795548;
+        background-color: $color-primary;
         border-radius: 50%;
     }
     .date p {
         font-size: 12px;
-        color: #777;
+        color:$color-primary;
         text-transform: lowercase;
         font-style: italic;
     }
@@ -21,7 +23,7 @@ page-chama-reports {
     .page-title p{
         font-weight: bold;
         font-size: 14px;
-        color: #777;
+        color: $color-primary;
         margin-left: 16px;
     }
     .page-title{
@@ -37,13 +39,13 @@ page-chama-reports {
 
         h2{
             font-size: 12px;
-            color:#795548;
+            color:$color-primary;
             font-weight: bold;
             margin: 0;
         } 
         h4{
             font-size: 14px;
-            color: #e38d25;
+            color: $color-secondary;
             font-weight: bold;
             margin: 0;
         }      
@@ -53,7 +55,7 @@ page-chama-reports {
         text-align: center;
         p{
             font-size:16px;
-            color: #795548;
+            color: $color-primary;
             font-weight: bold;
         }
     }

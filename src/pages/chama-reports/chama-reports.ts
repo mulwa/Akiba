@@ -32,8 +32,7 @@ export class ChamaReportsPage {
   }
   loadTransactions(){
     let loading = this.loadingCtrl.create({
-      content:'Loading Transactions Please Wait',
-      dismissOnPageChange:true
+      content:'Loading Transactions Please Wait',      
     });
     loading.present();    
     this.chamaProvider.getTransactions(this.chamaDetails.id).subscribe(data =>{

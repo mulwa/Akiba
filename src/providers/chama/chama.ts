@@ -1,7 +1,7 @@
 import { BASEURL } from './../../models/BaseUrl';
 import { AuthProvider } from './../auth/auth';
 import { Injectable } from '@angular/core';
-import { Http, RequestOptions,Headers,Response } from '@angular/http';
+import { Http, RequestOptions,Headers,Response,URLSearchParams } from '@angular/http';
 import 'rxjs/add/operator/map';
 
 

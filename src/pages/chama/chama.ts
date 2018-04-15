@@ -14,26 +14,24 @@ import { AuthProvider } from './../../providers/auth/auth';
   templateUrl: 'chama.html',
 })
 export class ChamaPage {
-  private mychamas:ChamaInterface[];
-  private chama:string; 
-  private user_token:string;
+  mychamas:ChamaInterface[];
+  chama:string; 
+  user_token:string;
   // private accountBalance:any;
-  private user:string;
+   user:string;
    mChama:ChamaInterface;
-
-
   constructor(public navCtrl: NavController,
-               private alertCtrl: AlertController,
-               private toastCtrl:ToastController,
-               private chamaService : ChamaProvider,
-               private authService: AuthProvider,
-               private userDataService: UserDataProvider,
-               private loadingCtrl : LoadingController) {
+               public alertCtrl: AlertController,
+               public toastCtrl:ToastController,
+               public chamaService : ChamaProvider,
+               public authService: AuthProvider,
+               public userDataService: UserDataProvider,
+               public loadingCtrl : LoadingController) {
     this.chama = "myaccounts";     
     this.user_token = this.authService.getUserToken();
     this.user = this.authService.getCurrentEmail();
-    console.log(this.user_token);
-    
+    console.log(this.user_token);    
+          
   }
   ionViewCanEnter():boolean {
     if(this.authService.getUserToken() ==null){
@@ -43,19 +41,19 @@ export class ChamaPage {
     }    
   } 
 
-  ionViewDidLoad() { 
-    this.get_my_chama();    
+  ionViewDidLoad() {         
     if(this.user_token !== null){
       this.userDataService.getCurrentBalance(this.user_token).subscribe(data =>{       
         console.log(data);
       });
+      this.get_my_chama();
     }   
     
   }   
  
   getChama(event:any){
     // reset all chamas
-    this.get_my_chama();
+    // this.get_my_chama();
     let val =event.target.value;
     // make sure that the user types something
     if(val && val.trim() != ''){
