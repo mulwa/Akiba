@@ -37,6 +37,7 @@ export class HomePage {
       this.regProvider.regiserUser(this.signUpForm.value).subscribe((data)=>{
         console.log(data);
         if(data.status=="success"){
+          this.signUpForm.reset();
           this.message="Thanks for Joining Our community"
         }else{
           this.message="Please try Again"

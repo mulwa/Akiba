@@ -31,11 +31,8 @@ export class ChamaDepositPage {
   }
 
   ionViewDidLoad() {
-    if(this.user_token != null){
-      this.userDataProvider.getAccountBalance(this.user_token).subscribe(data =>{
-        this.accountBalance = data.account_amount;
-      });
-    }
+    this.getAccountBalance();
+    
   }
   initializeForm(){
     this.depositForm = this.form_builder.group({
@@ -52,7 +49,10 @@ export class ChamaDepositPage {
       loader.present().then(()=>{
         this.chama_provider.depositToChama(this.depositForm.value.amount,this.chamaDetails.id).subscribe(res =>{
           if(res.status ==="success"){
+            this.depositForm.reset();
+            this.getAccountBalance();
             this.userDataProvider.showToast("Deposit Was Successfull");
+            
           }else{
             this.userDataProvider.showToast(res.message);
           }
@@ -66,6 +66,13 @@ export class ChamaDepositPage {
 
     }else{
       this.userDataProvider.showToast("You dont have enough money to complete this Transaction, Current balance is "+this.accountBalance);
+    }
+  }
+  getAccountBalance(){
+    if(this.user_token != null){
+      this.userDataProvider.getAccountBalance(this.user_token).subscribe(data =>{
+        this.accountBalance = data.account_amount;
+      });
     }
   }
   

@@ -14,7 +14,7 @@ import { AuthProvider } from './../../providers/auth/auth';
   templateUrl: 'chama.html',
 })
 export class ChamaPage {
-  mychamas:ChamaInterface[];
+  mychamas?:ChamaInterface[];
   chama:string; 
   user_token:string;
   // private accountBalance:any;
@@ -56,7 +56,7 @@ export class ChamaPage {
     // this.get_my_chama();
     let val =event.target.value;
     // make sure that the user types something
-    if(val && val.trim() != ''){
+    if(val && val.trim() != ''  && this.mychamas !== undefined){
       this.mychamas = this.mychamas.filter((item)=>{
         return (item.account_name.toLowerCase().indexOf(val.toLowerCase()) > -1);
       });
@@ -112,6 +112,8 @@ export class ChamaPage {
         loader.dismiss();
         if(data.status == 'success'){
           this.userDataService.showToast(data.message);
+          this.get_my_chama();
+          
         }else{
           this.userDataService.showToast(`Try again later Please`);
         }

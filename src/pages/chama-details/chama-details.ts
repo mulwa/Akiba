@@ -28,6 +28,7 @@ export class ChamaDetailsPage {
   }
   openPage(page:string){    
     this.navCtrl.push(page,this.chama);
+    console.log(page)
   }
 
 }

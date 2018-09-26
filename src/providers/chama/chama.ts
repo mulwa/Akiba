@@ -67,4 +67,10 @@ export class ChamaProvider {
   getTransactions(accountId:number){
     return this.http.get(BASEURL+"account/"+accountId+"/transactions").map(res =>res.json());
   }
+
+  // removing member form  a  chama
+  removeMember(accountId:number, userId:number){
+    return  this.http.get(BASEURL+"chama/"+accountId+"/"+userId+"/destroy").map(res => res.json());
+  }
+
 }
