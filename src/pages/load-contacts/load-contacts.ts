@@ -8,8 +8,7 @@ import { Contacts } from '@ionic-native/contacts';
   selector: 'page-load-contacts',
   templateUrl: 'load-contacts.html',
 })
-export class LoadContactsPage {
-  private CONTACT_KEY = 'contacts';  
+export class LoadContactsPage {  
   private contactFound = [];
   
 
@@ -31,10 +30,20 @@ export class LoadContactsPage {
       content:'Please Wait Fetching Contacts'
     });
     loader.present().then(()=>{
-      this.contacts.find(['displayName', 'phoneNumbers'], {multiple: true})
+      let options = {
+		    filter : "",
+		    multiple:true,
+		    hasPhoneNumber:true	
+		};
+      this.contacts.find(['displayName', 'phoneNumbers'],options)
       .then(contacts =>{
         loader.dismiss()
-        this.contactFound = contacts;
+        for(let item = 0; item < contacts.length; item++){
+          if(contacts[item].phoneNumbers != null){
+            this.contactFound = contacts;
+          }
+        }
+        
       }).catch((error =>{
         loader.dismiss()
         console.log('unable to fetch contacts'+error)

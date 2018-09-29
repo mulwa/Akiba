@@ -1,15 +1,19 @@
 <ion-header>
-  <ion-navbar>
+  <ion-navbar color="primary">
     <ion-title>Select Contacts</ion-title>
   </ion-navbar>
 
 </ion-header>
 
 
-<ion-content padding>
+<ion-content no-padding>
   <ion-list>
     <ion-item *ngFor="let contact of contactFound" tappable (tap)="selectNumber(contact.phoneNumbers[0].value)">
-      {{contact.displayName || contact.phoneNumbers[0].value}}
+      <ion-avatar item-start>
+          <img src="assets/images/icon.png">        
+      </ion-avatar>
+      <p>{{contact.displayName}}</p>
+      <p>{{contact?.phoneNumbers[0].value}}</p>
     </ion-item>
     
   </ion-list>
