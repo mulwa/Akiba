@@ -35,8 +35,8 @@
   <ion-list padding>
     <ion-item>
       <ion-label floating>Receiver</ion-label>
-      <ion-input type="text"></ion-input>
-      <button ion-button  outline item-right (click)="loadContact()"><ion-icon ios="ios-contacts" md="md-contacts"></ion-icon></button>
+      <ion-input type="text" [(ngModel)]="contactSelected"></ion-input>
+      <button ion-button  outline item-right (tap)="loadContact()"><ion-icon ios="ios-contacts" md="md-contacts"></ion-icon></button>
     </ion-item>
     
     <ion-item>
@@ -46,9 +46,7 @@
     <ion-item>
       <button id="btnMedium" block ion-button color="secondary" type="submit">Transfer</button>
     </ion-item>
-    <ion-item>
-      <button id="btnMedium" block ion-button color="secondary" (click)="saveContact()">Sync Contacts</button>
-    </ion-item>
+    
 
   </ion-list>
 

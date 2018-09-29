@@ -29,6 +29,7 @@ import { RegistrationProvider } from '../providers/registration/registration';
 import { FixedAccountProvider } from '../providers/fixed-account/fixed-account';
 import { ChamaProvider } from '../providers/chama/chama';
 import { Contacts} from '@ionic-native/contacts';
+import { LoadContactsPage } from '../pages/load-contacts/load-contacts';
 
 
 
@@ -45,8 +46,8 @@ import { Contacts} from '@ionic-native/contacts';
     FixedAmountPage,
     LengoAccountPage,
     TransferPage,
-    ChamaDetailsPage 
-    
+    ChamaDetailsPage,
+    LoadContactsPage    
 
   ],
   imports: [
@@ -68,7 +69,8 @@ import { Contacts} from '@ionic-native/contacts';
     FixedAmountPage,
     LengoAccountPage,
     TransferPage,
-    ChamaDetailsPage        
+    ChamaDetailsPage,
+    LoadContactsPage        
     
   ],
   providers: [
