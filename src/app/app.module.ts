@@ -30,6 +30,7 @@ import { FixedAccountProvider } from '../providers/fixed-account/fixed-account';
 import { ChamaProvider } from '../providers/chama/chama';
 import { Contacts} from '@ionic-native/contacts';
 import { LoadContactsPage } from '../pages/load-contacts/load-contacts';
+import { TransferProvider } from '../providers/transfer/transfer';
 
 
 
@@ -85,7 +86,8 @@ import { LoadContactsPage } from '../pages/load-contacts/load-contacts';
     UserDataProvider,
     RegistrationProvider,
     FixedAccountProvider,
-    ChamaProvider,    
+    ChamaProvider
+     
     
   ]
 })

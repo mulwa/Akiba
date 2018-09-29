@@ -69,10 +69,10 @@ ionViewCanEnter():boolean {
     console.log('actual balance '+this.accountBalance);
     if(this.userDataProvider.validateAmount(this.lengoForm.value.contr_amount,this.accountBalance)){
       let loader = this.loadingCtrl.create({
-        content:"Setting Your Lengo Amount",
-        duration:1000
+        content:"Setting Your Lengo Amount",        
       });
       loader.present().then(()=>{
+        loader.dismiss();
         this.chama_provider.longoSavings(this.lengoForm.value).subscribe((res)=>{
           if(res.status ==="success"){
             this.userDataProvider.showToast("Transaction was Successfull");
@@ -81,6 +81,7 @@ ionViewCanEnter():boolean {
           }
 
         },error =>{
+          loader.dismiss()
           console.log(`An error has occurred please Try again later ${error}`);
           this.userDataProvider.showToast(`An error has occurred please Try again later ${error}`);
         

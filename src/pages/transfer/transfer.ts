@@ -1,9 +1,11 @@
+import { ChamaProvider } from './../../providers/chama/chama';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { LoadContactsPage } from './../load-contacts/load-contacts';
 import { Component } from '@angular/core';
 import { Storage } from '@ionic/storage';
 import { IonicPage, NavController,AlertController,ToastController,AlertOptions,LoadingController, ModalController  } from 'ionic-angular';
 import { Contacts, Contact, ContactField, ContactName } from '@ionic-native/contacts';
+
 
 
 @IonicPage()
@@ -21,6 +23,7 @@ export class TransferPage {
               private toastCtrl: ToastController,
               public modalCtrl: ModalController,
               private storage : Storage,
+              private chamaProvider:ChamaProvider,
               private formBuilder: FormBuilder,              
               private loadingCtrl: LoadingController) {
     
@@ -46,10 +49,7 @@ export class TransferPage {
     });
     contact_modal.present();    
   }
-  saveContact(){
-    console.log('saving contacts called')
-        
-  }
+  
   showToast(msg:string){
     let toast = this.toastCtrl.create({
       message : msg,
@@ -61,6 +61,25 @@ export class TransferPage {
 
 onTranfer(){
   console.log('Transfering cash')
+  let loader = this.loadingCtrl.create({
+    content:'Please Wait Verifying Transfer'
+  });
+  loader.present().then(()=>{
+    this.chamaProvider.transferCash(this.trasferForm.value).subscribe(res =>{
+      loader.dismiss();
+      if(res.status =="success"){
+        this.showToast(res.description);
+
+      }else{
+        this.showToast(`Error ${res.description}`);
+      }
+
+    }, error =>{
+      loader.dismiss()
+      console.log("an error has occoured"+error);
+      this.showToast('An error has Occured'+error)
+    })
+  })
 }
 
 }

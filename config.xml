@@ -3,7 +3,7 @@
     <name>Akiba</name>
     <description>Akiba is a virtual saving and banking App</description>
     <author email="mulwatech@gmail.com" href="http://mulwatech.co.nf/">Akiba Developers</author>
-    <content original-src="index.html" src="http://192.168.88.71:8100" />
+    <content src="index.html" />
     <access origin="*" />
     <allow-navigation href="http://ionic.local/*" />
     <allow-intent href="http://*/*" />

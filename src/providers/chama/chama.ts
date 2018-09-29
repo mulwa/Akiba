@@ -73,4 +73,9 @@ export class ChamaProvider {
     return  this.http.get(BASEURL+"chama/"+accountId+"/"+userId+"/destroy").map(res => res.json());
   }
 
+  // method for transfer cash
+  transferCash(details:any){
+    return this.http.post(BASEURL+"transfers",details, this.options).map(res => res.json())
+  }
+
 }
