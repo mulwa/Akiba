@@ -1,7 +1,9 @@
+import { ContactInterface } from './../../models/contactI';
 import { UserDataProvider } from './../../providers/user-data/user-data';
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams, ViewController, LoadingController } from 'ionic-angular';
 import { Contacts } from '@ionic-native/contacts';
+import { Storage } from '@ionic/storage';
 
 @IonicPage()
 @Component({
@@ -10,11 +12,13 @@ import { Contacts } from '@ionic-native/contacts';
 })
 export class LoadContactsPage {  
   private contactFound = [];
+  private contact_object:ContactInterface;
   
 
   constructor(public navCtrl: NavController,
               public navParams: NavParams,
               public contacts: Contacts,
+              public storage: Storage,
               public userProvider:UserDataProvider,
               public loadingCtrl: LoadingController,
               public viewCtrl:ViewController) {
@@ -41,6 +45,11 @@ export class LoadContactsPage {
         for(let item = 0; item < contacts.length; item++){
           if(contacts[item].phoneNumbers != null){
             this.contactFound = contacts;
+            this.contact_object = {
+              name:contacts[item].displayName,
+              phoneNo:contacts[item].phoneNumbers[0].value
+            }
+            console.log(this.contact_object);
           }
         }
         
@@ -54,7 +63,7 @@ export class LoadContactsPage {
   }
   selectNumber(number){
     this.viewCtrl.dismiss(number)
-
   }
+  
 
 }

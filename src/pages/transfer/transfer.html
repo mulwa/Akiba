@@ -33,21 +33,20 @@
   </div>
   </ion-grid> 
   <ion-list padding>
+    <form [formGroup]="trasferForm" (ngSubmit)="onTranfer()">
     <ion-item>
       <ion-label floating>Receiver</ion-label>
-      <ion-input type="text" [(ngModel)]="contactSelected"></ion-input>
+      <ion-input type="text" [(ngModel)]="contactSelected" formControlName="receiver"></ion-input>
       <button ion-button  outline item-right (tap)="loadContact()"><ion-icon ios="ios-contacts" md="md-contacts"></ion-icon></button>
     </ion-item>
     
     <ion-item>
       <ion-label floating >Amount</ion-label>
-      <ion-input type="text"></ion-input>
+      <ion-input type="number" formControlName="Amount"></ion-input>
     </ion-item>    
     <ion-item>
-      <button id="btnMedium" block ion-button color="secondary" type="submit">Transfer</button>
-    </ion-item>
-    
-
+      <button id="btnMedium" block ion-button color="secondary" [disabled]="!trasferForm.valid" type="submit">Transfer</button>
+    </ion-item>    
+  </form>
   </ion-list>
-
 </ion-content>

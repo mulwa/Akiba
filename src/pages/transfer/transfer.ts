@@ -1,3 +1,4 @@
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { LoadContactsPage } from './../load-contacts/load-contacts';
 import { Component } from '@angular/core';
 import { Storage } from '@ionic/storage';
@@ -12,6 +13,7 @@ import { Contacts, Contact, ContactField, ContactName } from '@ionic-native/cont
 })
 export class TransferPage { 
   public contactSelected:any;
+  public trasferForm: FormGroup;
 
   constructor(public navCtrl: NavController,
               private contacts: Contacts,
@@ -19,11 +21,20 @@ export class TransferPage {
               private toastCtrl: ToastController,
               public modalCtrl: ModalController,
               private storage : Storage,
+              private formBuilder: FormBuilder,              
               private loadingCtrl: LoadingController) {
+    
+              this.initializaForm();
   }
 
   ionViewDidLoad() {
     
+  }
+  initializaForm(){
+    this.trasferForm = this.formBuilder.group({
+      Amount:['', Validators.required],
+      receiver: ['', Validators.required]
+    })
   }
   private loadContact(){
     console.log('Loading numbers called')
@@ -47,5 +58,9 @@ export class TransferPage {
     });
     toast.present();
   }
+
+onTranfer(){
+  console.log('Transfering cash')
+}
 
 }
